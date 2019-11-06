@@ -75,7 +75,7 @@ int main(void) {
     display_clear();
     display_setTimeText(time.hours, time.minutes);
     display_show();
-    
+    _delay_ms(2000);
     //co2 test begin
     while(1)
     {

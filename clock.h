@@ -38,6 +38,12 @@ typedef struct __attribute__ ((packed))
     uint8_t controlRegister;
 } TClock;
 
+typedef struct __attribute__ ((packed))
+{
+    uint8_t addr;
+    TClock data;
+} TClockTWICont;
+
 void clock_init(void);
 void clock_getTime(TTime * time);
 

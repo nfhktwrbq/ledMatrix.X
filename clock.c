@@ -8,21 +8,24 @@
 
 static void getDataReg(TClock * clk)
 {
-    twi_readBytes(DS1307_ADDR, 0, (uint8_t *)clk, sizeof(TClock));
-//    uart_send(clk->time.seconds);
-//    uart_send(clk->time.minutes);
-//    uart_send(clk->time.hours);
-//    uart_send(clk->date.dayOfWeek);
-//    uart_send(clk->date.day);
-//    uart_send(clk->date.month);
-//    uart_send(clk->date.year);
-//    uart_send(clk->controlRegister);
+    TClockTWICont clockCont;
+    clockCont.data.time.seconds = 0;
+    clockCont.addr = (DS1307_ADDR << 1) | 0; 
+    
+    TWI_SendData((uint8_t *)&clockCont, 2);
+    
+    clockCont.addr = (DS1307_ADDR << 1) | 1;
+    TWI_SendData((uint8_t *)&clockCont, sizeof(clockCont));
+    
+    TWI_GetData((uint8_t *)&clockCont, sizeof(clockCont));
+    
+    memcpy(clk, &(clockCont.data), sizeof(TClock));
 }
 
 
 void clock_init(void)
 {
-    twi_init();
+    TWI_MasterInit(100);
 }
 
 void clock_getTime(TTime * time)
