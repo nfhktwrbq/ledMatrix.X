@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/mhz19b.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/display.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/nbproject/Makefile-default.mk</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/clock.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.cpp</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/matrix.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/debug.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/uart.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/main.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/mhz19b.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/uart.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/Makefile</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/ring_buffer.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/resource.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/ring_buffer.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/twi.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/font.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/spi.h</file>
+        </group>
+    </open-files>
+</project-private>
