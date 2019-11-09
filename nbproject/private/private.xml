@@ -8,7 +8,6 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/nbproject/Makefile-default.mk</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/clock.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.cpp</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/matrix.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/debug.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/uart.h</file>
@@ -22,7 +21,9 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/ring_buffer.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/twi.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/font.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/clock.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/spi.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/twi.c</file>
         </group>
     </open-files>
 </project-private>
