@@ -19,6 +19,9 @@
       <itemPath>bmp280.h</itemPath>
       <itemPath>bmp280_defs.h</itemPath>
       <itemPath>bmp.h</itemPath>
+      <itemPath>bme280.h</itemPath>
+      <itemPath>bme280_defs.h</itemPath>
+      <itemPath>bme.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -41,6 +44,8 @@
       <itemPath>timer.c</itemPath>
       <itemPath>bmp280.c</itemPath>
       <itemPath>bmp.c</itemPath>
+      <itemPath>bme280.c</itemPath>
+      <itemPath>bme.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

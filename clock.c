@@ -25,7 +25,7 @@ static void getDataReg(TClock * clk)
 
 void clock_init(void)
 {
-    TWI_MasterInit(100);
+    
 }
 
 void clock_getTime(TTime * time)

@@ -5,6 +5,7 @@
 #include "bmp.h"
 #include "twi.h"
 
+#define BMP_BUFFER_SIZE TWI_BUFFER_SIZE
 
 int8_t i2c_reg_write(uint8_t i2c_addr, uint8_t reg_addr, uint8_t *reg_data, uint16_t length);
 int8_t i2c_reg_read(uint8_t i2c_addr, uint8_t reg_addr, uint8_t *reg_data, uint16_t length);
@@ -14,7 +15,7 @@ void delay_ms(uint32_t period_ms);
 
 static struct bmp280_dev bmp;
 
-int8_t bmp_init()
+int8_t bmp_init(void)
 {
     int8_t rslt;
     
@@ -64,7 +65,7 @@ int8_t bmp_init()
         return rslt;
 
     /* Always set the power mode after setting the configuration */
-    rslt = bmp280_set_power_mode(BMP280_FORCED_MODE, &bmp);
+    rslt = bmp280_set_power_mode(BMP280_NORMAL_MODE, &bmp);
      
     return rslt;
 }
@@ -105,8 +106,8 @@ int8_t i2c_reg_write(uint8_t i2c_addr, uint8_t reg_addr, uint8_t *reg_data, uint
     if(length > BMP_BUFFER_SIZE)
         return 1; //error
     
-    buffer[0] = i2c_addr;
-    buffer[1] = reg_addr << 1;
+    buffer[0] = i2c_addr << 1;
+    buffer[1] = reg_addr;
     
     memcpy(&buffer[2], reg_data, length);
     
@@ -119,13 +120,13 @@ int8_t i2c_reg_read(uint8_t i2c_addr, uint8_t reg_addr, uint8_t *reg_data, uint1
 {
     uint8_t buffer[2];
     
-    buffer[0] = i2c_addr;
-    buffer[1] = reg_addr << 1;
+    buffer[0] = i2c_addr << 1;
+    buffer[1] = reg_addr;
     
     TWI_SendData(buffer, 2);
     
-    buffer[1] = (reg_addr << 1) | 1;
-    TWI_SendData(buffer, length + 2);
+    buffer[0] = (i2c_addr << 1) | 1;
+    TWI_SendData(buffer, length + 1);
     
     TWI_GetData(reg_data, length);
     

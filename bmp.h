@@ -10,11 +10,13 @@
 
 #ifdef	__cplusplus
 extern "C" {
-#endif
+#endif    
+    
 
-#define BMP_BUFFER_SIZE 16
-
-
+int8_t bmp_init(void);
+int8_t bmp_getTemperature(int32_t * temp32);
+int8_t bmp_getPressure(uint32_t * pres32);
+    
 #ifdef	__cplusplus
 }
 #endif
