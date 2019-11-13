@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c spi.c matrix.c display.c font.c debug.c twi.c clock.c uart.c mhz19b.c ring_buffer.c timer.c bmp280.c bmp.c bme280.c bme.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c spi.c matrix.c display.c font.c debug.c twi.c clock.c uart.c mhz19b.c ring_buffer.c timer.c bmp280.c bmp.c bme280.c bme.c buttons.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/spi.o ${OBJECTDIR}/matrix.o ${OBJECTDIR}/display.o ${OBJECTDIR}/font.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/clock.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/mhz19b.o ${OBJECTDIR}/ring_buffer.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/bmp280.o ${OBJECTDIR}/bmp.o ${OBJECTDIR}/bme280.o ${OBJECTDIR}/bme.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/spi.o.d ${OBJECTDIR}/matrix.o.d ${OBJECTDIR}/display.o.d ${OBJECTDIR}/font.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/twi.o.d ${OBJECTDIR}/clock.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/mhz19b.o.d ${OBJECTDIR}/ring_buffer.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/bmp280.o.d ${OBJECTDIR}/bmp.o.d ${OBJECTDIR}/bme280.o.d ${OBJECTDIR}/bme.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/spi.o ${OBJECTDIR}/matrix.o ${OBJECTDIR}/display.o ${OBJECTDIR}/font.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/clock.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/mhz19b.o ${OBJECTDIR}/ring_buffer.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/bmp280.o ${OBJECTDIR}/bmp.o ${OBJECTDIR}/bme280.o ${OBJECTDIR}/bme.o ${OBJECTDIR}/buttons.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/spi.o.d ${OBJECTDIR}/matrix.o.d ${OBJECTDIR}/display.o.d ${OBJECTDIR}/font.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/twi.o.d ${OBJECTDIR}/clock.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/mhz19b.o.d ${OBJECTDIR}/ring_buffer.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/bmp280.o.d ${OBJECTDIR}/bmp.o.d ${OBJECTDIR}/bme280.o.d ${OBJECTDIR}/bme.o.d ${OBJECTDIR}/buttons.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/spi.o ${OBJECTDIR}/matrix.o ${OBJECTDIR}/display.o ${OBJECTDIR}/font.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/clock.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/mhz19b.o ${OBJECTDIR}/ring_buffer.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/bmp280.o ${OBJECTDIR}/bmp.o ${OBJECTDIR}/bme280.o ${OBJECTDIR}/bme.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/spi.o ${OBJECTDIR}/matrix.o ${OBJECTDIR}/display.o ${OBJECTDIR}/font.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/clock.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/mhz19b.o ${OBJECTDIR}/ring_buffer.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/bmp280.o ${OBJECTDIR}/bmp.o ${OBJECTDIR}/bme280.o ${OBJECTDIR}/bme.o ${OBJECTDIR}/buttons.o
 
 # Source Files
-SOURCEFILES=main.c spi.c matrix.c display.c font.c debug.c twi.c clock.c uart.c mhz19b.c ring_buffer.c timer.c bmp280.c bmp.c bme280.c bme.c
+SOURCEFILES=main.c spi.c matrix.c display.c font.c debug.c twi.c clock.c uart.c mhz19b.c ring_buffer.c timer.c bmp280.c bmp.c bme280.c bme.c buttons.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I ${DFP_DIR}/include
@@ -206,6 +206,12 @@ ${OBJECTDIR}/bme.o: bme.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/bme.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bme.o.d" -MT "${OBJECTDIR}/bme.o.d" -MT ${OBJECTDIR}/bme.o  -o ${OBJECTDIR}/bme.o bme.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
+${OBJECTDIR}/buttons.o: buttons.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/buttons.o.d 
+	@${RM} ${OBJECTDIR}/buttons.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/buttons.o.d" -MT "${OBJECTDIR}/buttons.o.d" -MT ${OBJECTDIR}/buttons.o  -o ${OBJECTDIR}/buttons.o buttons.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+	
 else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -302,6 +308,12 @@ ${OBJECTDIR}/bme.o: bme.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/bme.o.d 
 	@${RM} ${OBJECTDIR}/bme.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bme.o.d" -MT "${OBJECTDIR}/bme.o.d" -MT ${OBJECTDIR}/bme.o  -o ${OBJECTDIR}/bme.o bme.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/buttons.o: buttons.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/buttons.o.d 
+	@${RM} ${OBJECTDIR}/buttons.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/buttons.o.d" -MT "${OBJECTDIR}/buttons.o.d" -MT ${OBJECTDIR}/buttons.o  -o ${OBJECTDIR}/buttons.o buttons.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
 endif
 

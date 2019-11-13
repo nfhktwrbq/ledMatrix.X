@@ -13,8 +13,9 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/spi.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/mhz19b.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bme.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/matrix.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bmp280_defs.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bme280.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/timer.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/main.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/mhz19b.c</file>
@@ -22,9 +23,10 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/ring_buffer.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/resource.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bmp.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bme280_defs.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/ring_buffer.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/twi.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bmp280.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/bme.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/font.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/clock.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/twi.c</file>
