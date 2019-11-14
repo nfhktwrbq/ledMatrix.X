@@ -23,6 +23,7 @@
       <itemPath>bme280_defs.h</itemPath>
       <itemPath>bme.h</itemPath>
       <itemPath>buttons.h</itemPath>
+      <itemPath>Menu.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -48,6 +49,7 @@
       <itemPath>bme280.c</itemPath>
       <itemPath>bme.c</itemPath>
       <itemPath>buttons.c</itemPath>
+      <itemPath>Menu.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
