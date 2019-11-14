@@ -32,7 +32,7 @@ extern "C" {
 #define PIN_BUTTON_LEFT     PINB
 #define PIN_BUTTON_RIGHT    PIND
 
-#define LONG_PRESS_TIMEOUT  2500
+#define LONG_PRESS_TIMEOUT  2000
     
 typedef enum 
 {

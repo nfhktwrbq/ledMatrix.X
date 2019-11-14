@@ -21,6 +21,7 @@
 #include "timer.h"
 #include "twi.h"
 #include "bme.h"
+#include "buttons.h"
 
 #ifdef DEBUG
 #include "debug.h"
@@ -30,7 +31,9 @@ static double PRECISION = 0.00000000000001;
 //static int MAX_NUMBER_STRING_SIZE = 32;
 
 char * dtoa(double n, char *s);
-
+void buttonsTest(void);
+void buttonsTestLong(void);
+void buttonTestNumber(void);
 /*
  * 
  */
@@ -86,7 +89,13 @@ int main(void) {
     //_delay_ms(2000);
     //co2 test begin
     
-    _delay_ms(2000);
+    //_delay_ms(2000);
+    buttons_init();
+    
+    while(1)
+    {
+        buttonsTestLong();
+    }
     
     
     int8_t bme_proc_status = 0;
@@ -137,6 +146,87 @@ int main(void) {
         PORTC &= ~0b00100000;
     }
 }
+
+void buttonTestNumber(void)
+{
+    uint8_t bn = buttons_getPressNumber();
+    if(bn)
+    {
+        char buf[4];
+        itoa(bn, buf, 10);
+        display_setText(buf, 0);
+        display_show();
+    }
+}
+
+void buttonsTestLong(void)
+{
+    uint8_t lb = 0;
+    buttons_proc();
+    
+    
+    lb = buttons_getLongPressNumber();
+    if(lb)
+    {
+        clear_longPressBuffer();
+        if(lb == 1)
+        {
+            display_setText("BEE", 0);
+            display_show();
+        }
+        if(lb == (BUTTON_UP))
+        {
+            display_setText("BAE", 0);
+            display_show();
+        }
+        if(lb == (BUTTON_DOWN))
+        {
+            display_setText("BBE", 0);
+            display_show();
+        }
+        if(lb == (BUTTON_LEFT))
+        {
+            display_setText("BHE", 0);
+            display_show();
+        }
+        if(lb == (BUTTON_RIGHT))
+        {
+            display_setText("BME", 0);
+            display_show();
+        }
+    }
+}
+
+
+void buttonsTest(void)
+{
+    if(buttons_getPress(BUTTON_ENTER))
+    {
+        display_setText("BE", 0);
+        display_show();
+    }
+    if(buttons_getPress(BUTTON_UP))
+    {
+        display_setText("BA", 0);
+        display_show();
+    }
+    if(buttons_getPress(BUTTON_DOWN))
+    {
+        display_setText("BB", 0);
+        display_show();
+    }
+    if(buttons_getPress(BUTTON_LEFT))
+    {
+        display_setText("BH", 0);
+        display_show();
+    }
+    if(buttons_getPress(BUTTON_RIGHT))
+    {
+        display_setText("BM", 0);
+        display_show();
+    }
+}
+
 
 char * dtoa(double n, char *s) {
     // handle special cases
@@ -209,3 +299,4 @@ char * dtoa(double n, char *s) {
     }
     return s;
 }
+

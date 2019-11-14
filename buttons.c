@@ -4,7 +4,7 @@
 #include "buttons.h"
 #include "timer.h"
 
-#define BUTTON_ENTER_BIT        0x01
+#define BUTTON_ENTER_BIT        0x02
 #define BUTTON_UP_BIT           0x40
 #define BUTTON_DOWN_BIT         0x20
 #define BUTTON_LEFT_BIT         0x01
@@ -26,36 +26,33 @@ bool buttons_getPress(TButton button)
     switch(button)
     {
         case BUTTON_ENTER:
-            return (bool)DDR_BUTTON_ENTER & BUTTON_ENTER_BIT;
+            return (bool)(PIN_BUTTON_ENTER & BUTTON_ENTER_BIT);
         case BUTTON_UP:
-            return (bool)DDR_BUTTON_UP & BUTTON_UP_BIT;
+            return (bool)(PIN_BUTTON_UP & BUTTON_UP_BIT);
         case BUTTON_DOWN:
-            return (bool)DDR_BUTTON_DOWN & BUTTON_DOWN_BIT;
+            return (bool)(PIN_BUTTON_DOWN & BUTTON_DOWN_BIT);
         case BUTTON_LEFT:
-            return (bool)DDR_BUTTON_LEFT & BUTTON_LEFT_BIT;
+            return (bool)(PIN_BUTTON_LEFT & BUTTON_LEFT_BIT);
         case BUTTON_RIGHT:
-            return (bool)DDR_BUTTON_RIGHT & BUTTON_RIGHT_BIT;
+            return (bool)(PIN_BUTTON_RIGHT & BUTTON_RIGHT_BIT);
         default:
             return false;
     }
 }
 
 uint8_t buttons_getPressNumber(void)
-{
-    uint8_t res = 0;
-    
-    if(DDR_BUTTON_ENTER & BUTTON_ENTER_BIT)
-        res |= (1 << BUTTON_ENTER);
-    if(DDR_BUTTON_UP & BUTTON_UP_BIT)
-        res |= (1 << BUTTON_UP);
-    if(DDR_BUTTON_DOWN & BUTTON_DOWN_BIT)
-        res |= (1 << BUTTON_DOWN);
-    if(DDR_BUTTON_LEFT & BUTTON_LEFT_BIT)
-        res |= (1 << BUTTON_LEFT);
-    if(DDR_BUTTON_RIGHT & BUTTON_RIGHT_BIT)
-        res |= (1 << BUTTON_RIGHT);
-    
-    return res;
+{    
+    if(PIN_BUTTON_ENTER & BUTTON_ENTER_BIT)
+        return  BUTTON_ENTER;
+    if(PIN_BUTTON_UP & BUTTON_UP_BIT)
+        return  BUTTON_UP;
+    if(PIN_BUTTON_DOWN & BUTTON_DOWN_BIT)
+        return  BUTTON_DOWN;
+    if(PIN_BUTTON_LEFT & BUTTON_LEFT_BIT)
+        return  BUTTON_LEFT;
+    if(PIN_BUTTON_RIGHT & BUTTON_RIGHT_BIT)
+        return  BUTTON_RIGHT;
+    return 0;
 }
 
 void buttons_proc(void)
@@ -82,7 +79,6 @@ void buttons_proc(void)
     else
     {
         pressFlag = false;
-        curButtonNum = 0;
     }
     prevButtonNum = curButtonNum;   
 }
