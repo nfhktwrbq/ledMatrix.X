@@ -4,26 +4,26 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>spi.h</itemPath>
-      <itemPath>matrix.h</itemPath>
-      <itemPath>display.h</itemPath>
-      <itemPath>font.h</itemPath>
-      <itemPath>debug.h</itemPath>
-      <itemPath>resource.h</itemPath>
-      <itemPath>twi.h</itemPath>
-      <itemPath>clock.h</itemPath>
-      <itemPath>uart.h</itemPath>
-      <itemPath>mhz19b.h</itemPath>
-      <itemPath>ring_buffer.h</itemPath>
-      <itemPath>timer.h</itemPath>
-      <itemPath>bmp280.h</itemPath>
-      <itemPath>bmp280_defs.h</itemPath>
-      <itemPath>bmp.h</itemPath>
-      <itemPath>bme280.h</itemPath>
-      <itemPath>bme280_defs.h</itemPath>
-      <itemPath>bme.h</itemPath>
-      <itemPath>buttons.h</itemPath>
-      <itemPath>Menu.h</itemPath>
+      <itemPath>include/menu/Menu.h</itemPath>
+      <itemPath>include/sensors/bme280.h</itemPath>
+      <itemPath>include/sensors/bme280_defs.h</itemPath>
+      <itemPath>include/sensors/bmp280.h</itemPath>
+      <itemPath>include/sensors/bmp280_defs.h</itemPath>
+      <itemPath>include/sensors/mhz19b.h</itemPath>
+      <itemPath>include/sensors/bme.h</itemPath>
+      <itemPath>include/sensors/bmp.h</itemPath>
+      <itemPath>include/sensors/buttons.h</itemPath>
+      <itemPath>include/sensors/clock.h</itemPath>
+      <itemPath>include/interfaces/twi.h</itemPath>
+      <itemPath>include/interfaces/uart.h</itemPath>
+      <itemPath>include/interfaces/spi.h</itemPath>
+      <itemPath>include/display/display.h</itemPath>
+      <itemPath>include/display/font.h</itemPath>
+      <itemPath>include/display/matrix.h</itemPath>
+      <itemPath>include/resource.h</itemPath>
+      <itemPath>include/debug.h</itemPath>
+      <itemPath>include/utils/timer.h</itemPath>
+      <itemPath>include/utils/ring_buffer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -32,24 +32,24 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>main.c</itemPath>
-      <itemPath>spi.c</itemPath>
-      <itemPath>matrix.c</itemPath>
-      <itemPath>display.c</itemPath>
-      <itemPath>font.c</itemPath>
-      <itemPath>debug.c</itemPath>
-      <itemPath>twi.c</itemPath>
-      <itemPath>clock.c</itemPath>
-      <itemPath>uart.c</itemPath>
-      <itemPath>mhz19b.c</itemPath>
-      <itemPath>ring_buffer.c</itemPath>
-      <itemPath>timer.c</itemPath>
-      <itemPath>bmp280.c</itemPath>
-      <itemPath>bmp.c</itemPath>
-      <itemPath>bme280.c</itemPath>
-      <itemPath>bme.c</itemPath>
-      <itemPath>buttons.c</itemPath>
-      <itemPath>Menu.c</itemPath>
+      <itemPath>src/menu/Menu.c</itemPath>
+      <itemPath>src/sensors/bme.c</itemPath>
+      <itemPath>src/sensors/bme280.c</itemPath>
+      <itemPath>src/sensors/bmp.c</itemPath>
+      <itemPath>src/sensors/bmp280.c</itemPath>
+      <itemPath>src/sensors/buttons.c</itemPath>
+      <itemPath>src/sensors/clock.c</itemPath>
+      <itemPath>src/sensors/mhz19b.c</itemPath>
+      <itemPath>src/interfaces/spi.c</itemPath>
+      <itemPath>src/interfaces/twi.c</itemPath>
+      <itemPath>src/interfaces/uart.c</itemPath>
+      <itemPath>src/display/display.c</itemPath>
+      <itemPath>src/display/font.c</itemPath>
+      <itemPath>src/display/matrix.c</itemPath>
+      <itemPath>src/debug.c</itemPath>
+      <itemPath>src/utils/ring_buffer.c</itemPath>
+      <itemPath>src/utils/timer.c</itemPath>
+      <itemPath>src/main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -144,7 +144,8 @@
         <property key="call-prologues" value="false"/>
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories"
+                  value="include;include/display;include/interfaces;include/menu;include/sensors;include/utils"/>
         <property key="extra-warnings" value="false"/>
         <property key="garbage-collect-data" value="true"/>
         <property key="garbage-collect-functions" value="true"/>

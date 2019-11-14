@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c spi.c matrix.c display.c font.c debug.c twi.c clock.c uart.c mhz19b.c ring_buffer.c timer.c bmp280.c bmp.c bme280.c bme.c buttons.c Menu.c
+SOURCEFILES_QUOTED_IF_SPACED=src/menu/Menu.c src/sensors/bme.c src/sensors/bme280.c src/sensors/bmp.c src/sensors/bmp280.c src/sensors/buttons.c src/sensors/clock.c src/sensors/mhz19b.c src/interfaces/spi.c src/interfaces/twi.c src/interfaces/uart.c src/display/display.c src/display/font.c src/display/matrix.c src/debug.c src/utils/ring_buffer.c src/utils/timer.c src/main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/spi.o ${OBJECTDIR}/matrix.o ${OBJECTDIR}/display.o ${OBJECTDIR}/font.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/clock.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/mhz19b.o ${OBJECTDIR}/ring_buffer.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/bmp280.o ${OBJECTDIR}/bmp.o ${OBJECTDIR}/bme280.o ${OBJECTDIR}/bme.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/Menu.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/spi.o.d ${OBJECTDIR}/matrix.o.d ${OBJECTDIR}/display.o.d ${OBJECTDIR}/font.o.d ${OBJECTDIR}/debug.o.d ${OBJECTDIR}/twi.o.d ${OBJECTDIR}/clock.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/mhz19b.o.d ${OBJECTDIR}/ring_buffer.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/bmp280.o.d ${OBJECTDIR}/bmp.o.d ${OBJECTDIR}/bme280.o.d ${OBJECTDIR}/bme.o.d ${OBJECTDIR}/buttons.o.d ${OBJECTDIR}/Menu.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/src/menu/Menu.o ${OBJECTDIR}/src/sensors/bme.o ${OBJECTDIR}/src/sensors/bme280.o ${OBJECTDIR}/src/sensors/bmp.o ${OBJECTDIR}/src/sensors/bmp280.o ${OBJECTDIR}/src/sensors/buttons.o ${OBJECTDIR}/src/sensors/clock.o ${OBJECTDIR}/src/sensors/mhz19b.o ${OBJECTDIR}/src/interfaces/spi.o ${OBJECTDIR}/src/interfaces/twi.o ${OBJECTDIR}/src/interfaces/uart.o ${OBJECTDIR}/src/display/display.o ${OBJECTDIR}/src/display/font.o ${OBJECTDIR}/src/display/matrix.o ${OBJECTDIR}/src/debug.o ${OBJECTDIR}/src/utils/ring_buffer.o ${OBJECTDIR}/src/utils/timer.o ${OBJECTDIR}/src/main.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/src/menu/Menu.o.d ${OBJECTDIR}/src/sensors/bme.o.d ${OBJECTDIR}/src/sensors/bme280.o.d ${OBJECTDIR}/src/sensors/bmp.o.d ${OBJECTDIR}/src/sensors/bmp280.o.d ${OBJECTDIR}/src/sensors/buttons.o.d ${OBJECTDIR}/src/sensors/clock.o.d ${OBJECTDIR}/src/sensors/mhz19b.o.d ${OBJECTDIR}/src/interfaces/spi.o.d ${OBJECTDIR}/src/interfaces/twi.o.d ${OBJECTDIR}/src/interfaces/uart.o.d ${OBJECTDIR}/src/display/display.o.d ${OBJECTDIR}/src/display/font.o.d ${OBJECTDIR}/src/display/matrix.o.d ${OBJECTDIR}/src/debug.o.d ${OBJECTDIR}/src/utils/ring_buffer.o.d ${OBJECTDIR}/src/utils/timer.o.d ${OBJECTDIR}/src/main.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/spi.o ${OBJECTDIR}/matrix.o ${OBJECTDIR}/display.o ${OBJECTDIR}/font.o ${OBJECTDIR}/debug.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/clock.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/mhz19b.o ${OBJECTDIR}/ring_buffer.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/bmp280.o ${OBJECTDIR}/bmp.o ${OBJECTDIR}/bme280.o ${OBJECTDIR}/bme.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/Menu.o
+OBJECTFILES=${OBJECTDIR}/src/menu/Menu.o ${OBJECTDIR}/src/sensors/bme.o ${OBJECTDIR}/src/sensors/bme280.o ${OBJECTDIR}/src/sensors/bmp.o ${OBJECTDIR}/src/sensors/bmp280.o ${OBJECTDIR}/src/sensors/buttons.o ${OBJECTDIR}/src/sensors/clock.o ${OBJECTDIR}/src/sensors/mhz19b.o ${OBJECTDIR}/src/interfaces/spi.o ${OBJECTDIR}/src/interfaces/twi.o ${OBJECTDIR}/src/interfaces/uart.o ${OBJECTDIR}/src/display/display.o ${OBJECTDIR}/src/display/font.o ${OBJECTDIR}/src/display/matrix.o ${OBJECTDIR}/src/debug.o ${OBJECTDIR}/src/utils/ring_buffer.o ${OBJECTDIR}/src/utils/timer.o ${OBJECTDIR}/src/main.o
 
 # Source Files
-SOURCEFILES=main.c spi.c matrix.c display.c font.c debug.c twi.c clock.c uart.c mhz19b.c ring_buffer.c timer.c bmp280.c bmp.c bme280.c bme.c buttons.c Menu.c
+SOURCEFILES=src/menu/Menu.c src/sensors/bme.c src/sensors/bme280.c src/sensors/bmp.c src/sensors/bmp280.c src/sensors/buttons.c src/sensors/clock.c src/sensors/mhz19b.c src/interfaces/spi.c src/interfaces/twi.c src/interfaces/uart.c src/display/display.c src/display/font.c src/display/matrix.c src/debug.c src/utils/ring_buffer.c src/utils/timer.c src/main.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I ${DFP_DIR}/include
@@ -110,222 +110,222 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.o.d 
-	@${RM} ${OBJECTDIR}/main.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/menu/Menu.o: src/menu/Menu.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/menu" 
+	@${RM} ${OBJECTDIR}/src/menu/Menu.o.d 
+	@${RM} ${OBJECTDIR}/src/menu/Menu.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/menu/Menu.o.d" -MT "${OBJECTDIR}/src/menu/Menu.o.d" -MT ${OBJECTDIR}/src/menu/Menu.o  -o ${OBJECTDIR}/src/menu/Menu.o src/menu/Menu.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/spi.o: spi.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/spi.o.d 
-	@${RM} ${OBJECTDIR}/spi.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/spi.o.d" -MT "${OBJECTDIR}/spi.o.d" -MT ${OBJECTDIR}/spi.o  -o ${OBJECTDIR}/spi.o spi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bme.o: src/sensors/bme.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bme.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bme.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bme.o.d" -MT "${OBJECTDIR}/src/sensors/bme.o.d" -MT ${OBJECTDIR}/src/sensors/bme.o  -o ${OBJECTDIR}/src/sensors/bme.o src/sensors/bme.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/matrix.o: matrix.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/matrix.o.d 
-	@${RM} ${OBJECTDIR}/matrix.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/matrix.o.d" -MT "${OBJECTDIR}/matrix.o.d" -MT ${OBJECTDIR}/matrix.o  -o ${OBJECTDIR}/matrix.o matrix.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bme280.o: src/sensors/bme280.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bme280.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bme280.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bme280.o.d" -MT "${OBJECTDIR}/src/sensors/bme280.o.d" -MT ${OBJECTDIR}/src/sensors/bme280.o  -o ${OBJECTDIR}/src/sensors/bme280.o src/sensors/bme280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/display.o: display.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/display.o.d 
-	@${RM} ${OBJECTDIR}/display.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/display.o.d" -MT "${OBJECTDIR}/display.o.d" -MT ${OBJECTDIR}/display.o  -o ${OBJECTDIR}/display.o display.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bmp.o: src/sensors/bmp.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bmp.o.d" -MT "${OBJECTDIR}/src/sensors/bmp.o.d" -MT ${OBJECTDIR}/src/sensors/bmp.o  -o ${OBJECTDIR}/src/sensors/bmp.o src/sensors/bmp.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/font.o: font.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/font.o.d 
-	@${RM} ${OBJECTDIR}/font.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/font.o.d" -MT "${OBJECTDIR}/font.o.d" -MT ${OBJECTDIR}/font.o  -o ${OBJECTDIR}/font.o font.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bmp280.o: src/sensors/bmp280.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp280.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp280.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bmp280.o.d" -MT "${OBJECTDIR}/src/sensors/bmp280.o.d" -MT ${OBJECTDIR}/src/sensors/bmp280.o  -o ${OBJECTDIR}/src/sensors/bmp280.o src/sensors/bmp280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/debug.o: debug.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/debug.o.d 
-	@${RM} ${OBJECTDIR}/debug.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/debug.o.d" -MT "${OBJECTDIR}/debug.o.d" -MT ${OBJECTDIR}/debug.o  -o ${OBJECTDIR}/debug.o debug.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/buttons.o: src/sensors/buttons.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/buttons.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/buttons.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/buttons.o.d" -MT "${OBJECTDIR}/src/sensors/buttons.o.d" -MT ${OBJECTDIR}/src/sensors/buttons.o  -o ${OBJECTDIR}/src/sensors/buttons.o src/sensors/buttons.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/twi.o: twi.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/twi.o.d 
-	@${RM} ${OBJECTDIR}/twi.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/twi.o.d" -MT "${OBJECTDIR}/twi.o.d" -MT ${OBJECTDIR}/twi.o  -o ${OBJECTDIR}/twi.o twi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/clock.o: src/sensors/clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/clock.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/clock.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/clock.o.d" -MT "${OBJECTDIR}/src/sensors/clock.o.d" -MT ${OBJECTDIR}/src/sensors/clock.o  -o ${OBJECTDIR}/src/sensors/clock.o src/sensors/clock.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/clock.o: clock.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/clock.o.d 
-	@${RM} ${OBJECTDIR}/clock.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/clock.o.d" -MT "${OBJECTDIR}/clock.o.d" -MT ${OBJECTDIR}/clock.o  -o ${OBJECTDIR}/clock.o clock.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/mhz19b.o: src/sensors/mhz19b.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/mhz19b.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/mhz19b.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/mhz19b.o.d" -MT "${OBJECTDIR}/src/sensors/mhz19b.o.d" -MT ${OBJECTDIR}/src/sensors/mhz19b.o  -o ${OBJECTDIR}/src/sensors/mhz19b.o src/sensors/mhz19b.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/uart.o: uart.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/uart.o.d 
-	@${RM} ${OBJECTDIR}/uart.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/uart.o.d" -MT "${OBJECTDIR}/uart.o.d" -MT ${OBJECTDIR}/uart.o  -o ${OBJECTDIR}/uart.o uart.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/interfaces/spi.o: src/interfaces/spi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/interfaces" 
+	@${RM} ${OBJECTDIR}/src/interfaces/spi.o.d 
+	@${RM} ${OBJECTDIR}/src/interfaces/spi.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/interfaces/spi.o.d" -MT "${OBJECTDIR}/src/interfaces/spi.o.d" -MT ${OBJECTDIR}/src/interfaces/spi.o  -o ${OBJECTDIR}/src/interfaces/spi.o src/interfaces/spi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/mhz19b.o: mhz19b.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/mhz19b.o.d 
-	@${RM} ${OBJECTDIR}/mhz19b.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/mhz19b.o.d" -MT "${OBJECTDIR}/mhz19b.o.d" -MT ${OBJECTDIR}/mhz19b.o  -o ${OBJECTDIR}/mhz19b.o mhz19b.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/interfaces/twi.o: src/interfaces/twi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/interfaces" 
+	@${RM} ${OBJECTDIR}/src/interfaces/twi.o.d 
+	@${RM} ${OBJECTDIR}/src/interfaces/twi.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/interfaces/twi.o.d" -MT "${OBJECTDIR}/src/interfaces/twi.o.d" -MT ${OBJECTDIR}/src/interfaces/twi.o  -o ${OBJECTDIR}/src/interfaces/twi.o src/interfaces/twi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/ring_buffer.o: ring_buffer.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/ring_buffer.o.d 
-	@${RM} ${OBJECTDIR}/ring_buffer.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/ring_buffer.o.d" -MT "${OBJECTDIR}/ring_buffer.o.d" -MT ${OBJECTDIR}/ring_buffer.o  -o ${OBJECTDIR}/ring_buffer.o ring_buffer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/interfaces/uart.o: src/interfaces/uart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/interfaces" 
+	@${RM} ${OBJECTDIR}/src/interfaces/uart.o.d 
+	@${RM} ${OBJECTDIR}/src/interfaces/uart.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/interfaces/uart.o.d" -MT "${OBJECTDIR}/src/interfaces/uart.o.d" -MT ${OBJECTDIR}/src/interfaces/uart.o  -o ${OBJECTDIR}/src/interfaces/uart.o src/interfaces/uart.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/timer.o: timer.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/timer.o.d 
-	@${RM} ${OBJECTDIR}/timer.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/timer.o.d" -MT "${OBJECTDIR}/timer.o.d" -MT ${OBJECTDIR}/timer.o  -o ${OBJECTDIR}/timer.o timer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/display/display.o: src/display/display.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/display" 
+	@${RM} ${OBJECTDIR}/src/display/display.o.d 
+	@${RM} ${OBJECTDIR}/src/display/display.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/display/display.o.d" -MT "${OBJECTDIR}/src/display/display.o.d" -MT ${OBJECTDIR}/src/display/display.o  -o ${OBJECTDIR}/src/display/display.o src/display/display.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bmp280.o: bmp280.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bmp280.o.d 
-	@${RM} ${OBJECTDIR}/bmp280.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bmp280.o.d" -MT "${OBJECTDIR}/bmp280.o.d" -MT ${OBJECTDIR}/bmp280.o  -o ${OBJECTDIR}/bmp280.o bmp280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/display/font.o: src/display/font.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/display" 
+	@${RM} ${OBJECTDIR}/src/display/font.o.d 
+	@${RM} ${OBJECTDIR}/src/display/font.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/display/font.o.d" -MT "${OBJECTDIR}/src/display/font.o.d" -MT ${OBJECTDIR}/src/display/font.o  -o ${OBJECTDIR}/src/display/font.o src/display/font.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bmp.o: bmp.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bmp.o.d 
-	@${RM} ${OBJECTDIR}/bmp.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bmp.o.d" -MT "${OBJECTDIR}/bmp.o.d" -MT ${OBJECTDIR}/bmp.o  -o ${OBJECTDIR}/bmp.o bmp.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/display/matrix.o: src/display/matrix.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/display" 
+	@${RM} ${OBJECTDIR}/src/display/matrix.o.d 
+	@${RM} ${OBJECTDIR}/src/display/matrix.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/display/matrix.o.d" -MT "${OBJECTDIR}/src/display/matrix.o.d" -MT ${OBJECTDIR}/src/display/matrix.o  -o ${OBJECTDIR}/src/display/matrix.o src/display/matrix.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bme280.o: bme280.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bme280.o.d 
-	@${RM} ${OBJECTDIR}/bme280.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bme280.o.d" -MT "${OBJECTDIR}/bme280.o.d" -MT ${OBJECTDIR}/bme280.o  -o ${OBJECTDIR}/bme280.o bme280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/debug.o: src/debug.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/debug.o.d 
+	@${RM} ${OBJECTDIR}/src/debug.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/debug.o.d" -MT "${OBJECTDIR}/src/debug.o.d" -MT ${OBJECTDIR}/src/debug.o  -o ${OBJECTDIR}/src/debug.o src/debug.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bme.o: bme.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bme.o.d 
-	@${RM} ${OBJECTDIR}/bme.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bme.o.d" -MT "${OBJECTDIR}/bme.o.d" -MT ${OBJECTDIR}/bme.o  -o ${OBJECTDIR}/bme.o bme.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/utils/ring_buffer.o: src/utils/ring_buffer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/utils" 
+	@${RM} ${OBJECTDIR}/src/utils/ring_buffer.o.d 
+	@${RM} ${OBJECTDIR}/src/utils/ring_buffer.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/utils/ring_buffer.o.d" -MT "${OBJECTDIR}/src/utils/ring_buffer.o.d" -MT ${OBJECTDIR}/src/utils/ring_buffer.o  -o ${OBJECTDIR}/src/utils/ring_buffer.o src/utils/ring_buffer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/buttons.o: buttons.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/buttons.o.d 
-	@${RM} ${OBJECTDIR}/buttons.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/buttons.o.d" -MT "${OBJECTDIR}/buttons.o.d" -MT ${OBJECTDIR}/buttons.o  -o ${OBJECTDIR}/buttons.o buttons.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/utils/timer.o: src/utils/timer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/utils" 
+	@${RM} ${OBJECTDIR}/src/utils/timer.o.d 
+	@${RM} ${OBJECTDIR}/src/utils/timer.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/utils/timer.o.d" -MT "${OBJECTDIR}/src/utils/timer.o.d" -MT ${OBJECTDIR}/src/utils/timer.o  -o ${OBJECTDIR}/src/utils/timer.o src/utils/timer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/Menu.o: Menu.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Menu.o.d 
-	@${RM} ${OBJECTDIR}/Menu.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/Menu.o.d" -MT "${OBJECTDIR}/Menu.o.d" -MT ${OBJECTDIR}/Menu.o  -o ${OBJECTDIR}/Menu.o Menu.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/main.o.d 
+	@${RM} ${OBJECTDIR}/src/main.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/main.o.d" -MT "${OBJECTDIR}/src/main.o.d" -MT ${OBJECTDIR}/src/main.o  -o ${OBJECTDIR}/src/main.o src/main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
 else
-${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main.o.d 
-	@${RM} ${OBJECTDIR}/main.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/menu/Menu.o: src/menu/Menu.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/menu" 
+	@${RM} ${OBJECTDIR}/src/menu/Menu.o.d 
+	@${RM} ${OBJECTDIR}/src/menu/Menu.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/menu/Menu.o.d" -MT "${OBJECTDIR}/src/menu/Menu.o.d" -MT ${OBJECTDIR}/src/menu/Menu.o  -o ${OBJECTDIR}/src/menu/Menu.o src/menu/Menu.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/spi.o: spi.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/spi.o.d 
-	@${RM} ${OBJECTDIR}/spi.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/spi.o.d" -MT "${OBJECTDIR}/spi.o.d" -MT ${OBJECTDIR}/spi.o  -o ${OBJECTDIR}/spi.o spi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bme.o: src/sensors/bme.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bme.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bme.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bme.o.d" -MT "${OBJECTDIR}/src/sensors/bme.o.d" -MT ${OBJECTDIR}/src/sensors/bme.o  -o ${OBJECTDIR}/src/sensors/bme.o src/sensors/bme.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/matrix.o: matrix.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/matrix.o.d 
-	@${RM} ${OBJECTDIR}/matrix.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/matrix.o.d" -MT "${OBJECTDIR}/matrix.o.d" -MT ${OBJECTDIR}/matrix.o  -o ${OBJECTDIR}/matrix.o matrix.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bme280.o: src/sensors/bme280.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bme280.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bme280.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bme280.o.d" -MT "${OBJECTDIR}/src/sensors/bme280.o.d" -MT ${OBJECTDIR}/src/sensors/bme280.o  -o ${OBJECTDIR}/src/sensors/bme280.o src/sensors/bme280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/display.o: display.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/display.o.d 
-	@${RM} ${OBJECTDIR}/display.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/display.o.d" -MT "${OBJECTDIR}/display.o.d" -MT ${OBJECTDIR}/display.o  -o ${OBJECTDIR}/display.o display.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bmp.o: src/sensors/bmp.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bmp.o.d" -MT "${OBJECTDIR}/src/sensors/bmp.o.d" -MT ${OBJECTDIR}/src/sensors/bmp.o  -o ${OBJECTDIR}/src/sensors/bmp.o src/sensors/bmp.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/font.o: font.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/font.o.d 
-	@${RM} ${OBJECTDIR}/font.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/font.o.d" -MT "${OBJECTDIR}/font.o.d" -MT ${OBJECTDIR}/font.o  -o ${OBJECTDIR}/font.o font.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/bmp280.o: src/sensors/bmp280.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp280.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/bmp280.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/bmp280.o.d" -MT "${OBJECTDIR}/src/sensors/bmp280.o.d" -MT ${OBJECTDIR}/src/sensors/bmp280.o  -o ${OBJECTDIR}/src/sensors/bmp280.o src/sensors/bmp280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/debug.o: debug.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/debug.o.d 
-	@${RM} ${OBJECTDIR}/debug.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/debug.o.d" -MT "${OBJECTDIR}/debug.o.d" -MT ${OBJECTDIR}/debug.o  -o ${OBJECTDIR}/debug.o debug.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/buttons.o: src/sensors/buttons.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/buttons.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/buttons.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/buttons.o.d" -MT "${OBJECTDIR}/src/sensors/buttons.o.d" -MT ${OBJECTDIR}/src/sensors/buttons.o  -o ${OBJECTDIR}/src/sensors/buttons.o src/sensors/buttons.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/twi.o: twi.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/twi.o.d 
-	@${RM} ${OBJECTDIR}/twi.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/twi.o.d" -MT "${OBJECTDIR}/twi.o.d" -MT ${OBJECTDIR}/twi.o  -o ${OBJECTDIR}/twi.o twi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/clock.o: src/sensors/clock.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/clock.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/clock.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/clock.o.d" -MT "${OBJECTDIR}/src/sensors/clock.o.d" -MT ${OBJECTDIR}/src/sensors/clock.o  -o ${OBJECTDIR}/src/sensors/clock.o src/sensors/clock.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/clock.o: clock.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/clock.o.d 
-	@${RM} ${OBJECTDIR}/clock.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/clock.o.d" -MT "${OBJECTDIR}/clock.o.d" -MT ${OBJECTDIR}/clock.o  -o ${OBJECTDIR}/clock.o clock.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/sensors/mhz19b.o: src/sensors/mhz19b.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/sensors" 
+	@${RM} ${OBJECTDIR}/src/sensors/mhz19b.o.d 
+	@${RM} ${OBJECTDIR}/src/sensors/mhz19b.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/sensors/mhz19b.o.d" -MT "${OBJECTDIR}/src/sensors/mhz19b.o.d" -MT ${OBJECTDIR}/src/sensors/mhz19b.o  -o ${OBJECTDIR}/src/sensors/mhz19b.o src/sensors/mhz19b.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/uart.o: uart.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/uart.o.d 
-	@${RM} ${OBJECTDIR}/uart.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/uart.o.d" -MT "${OBJECTDIR}/uart.o.d" -MT ${OBJECTDIR}/uart.o  -o ${OBJECTDIR}/uart.o uart.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/interfaces/spi.o: src/interfaces/spi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/interfaces" 
+	@${RM} ${OBJECTDIR}/src/interfaces/spi.o.d 
+	@${RM} ${OBJECTDIR}/src/interfaces/spi.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/interfaces/spi.o.d" -MT "${OBJECTDIR}/src/interfaces/spi.o.d" -MT ${OBJECTDIR}/src/interfaces/spi.o  -o ${OBJECTDIR}/src/interfaces/spi.o src/interfaces/spi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/mhz19b.o: mhz19b.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/mhz19b.o.d 
-	@${RM} ${OBJECTDIR}/mhz19b.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/mhz19b.o.d" -MT "${OBJECTDIR}/mhz19b.o.d" -MT ${OBJECTDIR}/mhz19b.o  -o ${OBJECTDIR}/mhz19b.o mhz19b.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/interfaces/twi.o: src/interfaces/twi.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/interfaces" 
+	@${RM} ${OBJECTDIR}/src/interfaces/twi.o.d 
+	@${RM} ${OBJECTDIR}/src/interfaces/twi.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/interfaces/twi.o.d" -MT "${OBJECTDIR}/src/interfaces/twi.o.d" -MT ${OBJECTDIR}/src/interfaces/twi.o  -o ${OBJECTDIR}/src/interfaces/twi.o src/interfaces/twi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/ring_buffer.o: ring_buffer.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/ring_buffer.o.d 
-	@${RM} ${OBJECTDIR}/ring_buffer.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/ring_buffer.o.d" -MT "${OBJECTDIR}/ring_buffer.o.d" -MT ${OBJECTDIR}/ring_buffer.o  -o ${OBJECTDIR}/ring_buffer.o ring_buffer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/interfaces/uart.o: src/interfaces/uart.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/interfaces" 
+	@${RM} ${OBJECTDIR}/src/interfaces/uart.o.d 
+	@${RM} ${OBJECTDIR}/src/interfaces/uart.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/interfaces/uart.o.d" -MT "${OBJECTDIR}/src/interfaces/uart.o.d" -MT ${OBJECTDIR}/src/interfaces/uart.o  -o ${OBJECTDIR}/src/interfaces/uart.o src/interfaces/uart.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/timer.o: timer.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/timer.o.d 
-	@${RM} ${OBJECTDIR}/timer.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/timer.o.d" -MT "${OBJECTDIR}/timer.o.d" -MT ${OBJECTDIR}/timer.o  -o ${OBJECTDIR}/timer.o timer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/display/display.o: src/display/display.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/display" 
+	@${RM} ${OBJECTDIR}/src/display/display.o.d 
+	@${RM} ${OBJECTDIR}/src/display/display.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/display/display.o.d" -MT "${OBJECTDIR}/src/display/display.o.d" -MT ${OBJECTDIR}/src/display/display.o  -o ${OBJECTDIR}/src/display/display.o src/display/display.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bmp280.o: bmp280.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bmp280.o.d 
-	@${RM} ${OBJECTDIR}/bmp280.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bmp280.o.d" -MT "${OBJECTDIR}/bmp280.o.d" -MT ${OBJECTDIR}/bmp280.o  -o ${OBJECTDIR}/bmp280.o bmp280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/display/font.o: src/display/font.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/display" 
+	@${RM} ${OBJECTDIR}/src/display/font.o.d 
+	@${RM} ${OBJECTDIR}/src/display/font.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/display/font.o.d" -MT "${OBJECTDIR}/src/display/font.o.d" -MT ${OBJECTDIR}/src/display/font.o  -o ${OBJECTDIR}/src/display/font.o src/display/font.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bmp.o: bmp.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bmp.o.d 
-	@${RM} ${OBJECTDIR}/bmp.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bmp.o.d" -MT "${OBJECTDIR}/bmp.o.d" -MT ${OBJECTDIR}/bmp.o  -o ${OBJECTDIR}/bmp.o bmp.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/display/matrix.o: src/display/matrix.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/display" 
+	@${RM} ${OBJECTDIR}/src/display/matrix.o.d 
+	@${RM} ${OBJECTDIR}/src/display/matrix.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/display/matrix.o.d" -MT "${OBJECTDIR}/src/display/matrix.o.d" -MT ${OBJECTDIR}/src/display/matrix.o  -o ${OBJECTDIR}/src/display/matrix.o src/display/matrix.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bme280.o: bme280.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bme280.o.d 
-	@${RM} ${OBJECTDIR}/bme280.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bme280.o.d" -MT "${OBJECTDIR}/bme280.o.d" -MT ${OBJECTDIR}/bme280.o  -o ${OBJECTDIR}/bme280.o bme280.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/debug.o: src/debug.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/debug.o.d 
+	@${RM} ${OBJECTDIR}/src/debug.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/debug.o.d" -MT "${OBJECTDIR}/src/debug.o.d" -MT ${OBJECTDIR}/src/debug.o  -o ${OBJECTDIR}/src/debug.o src/debug.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/bme.o: bme.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/bme.o.d 
-	@${RM} ${OBJECTDIR}/bme.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/bme.o.d" -MT "${OBJECTDIR}/bme.o.d" -MT ${OBJECTDIR}/bme.o  -o ${OBJECTDIR}/bme.o bme.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/utils/ring_buffer.o: src/utils/ring_buffer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/utils" 
+	@${RM} ${OBJECTDIR}/src/utils/ring_buffer.o.d 
+	@${RM} ${OBJECTDIR}/src/utils/ring_buffer.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/utils/ring_buffer.o.d" -MT "${OBJECTDIR}/src/utils/ring_buffer.o.d" -MT ${OBJECTDIR}/src/utils/ring_buffer.o  -o ${OBJECTDIR}/src/utils/ring_buffer.o src/utils/ring_buffer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/buttons.o: buttons.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/buttons.o.d 
-	@${RM} ${OBJECTDIR}/buttons.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/buttons.o.d" -MT "${OBJECTDIR}/buttons.o.d" -MT ${OBJECTDIR}/buttons.o  -o ${OBJECTDIR}/buttons.o buttons.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/utils/timer.o: src/utils/timer.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src/utils" 
+	@${RM} ${OBJECTDIR}/src/utils/timer.o.d 
+	@${RM} ${OBJECTDIR}/src/utils/timer.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/utils/timer.o.d" -MT "${OBJECTDIR}/src/utils/timer.o.d" -MT ${OBJECTDIR}/src/utils/timer.o  -o ${OBJECTDIR}/src/utils/timer.o src/utils/timer.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/Menu.o: Menu.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/Menu.o.d 
-	@${RM} ${OBJECTDIR}/Menu.o 
-	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328 -Wall -MD -MP -MF "${OBJECTDIR}/Menu.o.d" -MT "${OBJECTDIR}/Menu.o.d" -MT ${OBJECTDIR}/Menu.o  -o ${OBJECTDIR}/Menu.o Menu.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
+${OBJECTDIR}/src/main.o: src/main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/src" 
+	@${RM} ${OBJECTDIR}/src/main.o.d 
+	@${RM} ${OBJECTDIR}/src/main.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=atmega328p ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O3 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -DF_CPU=16000000UL -DDEBUG -DATMEGA328  -I "include" -I "include/display" -I "include/interfaces" -I "include/menu" -I "include/sensors" -I "include/utils" -Wall -MD -MP -MF "${OBJECTDIR}/src/main.o.d" -MT "${OBJECTDIR}/src/main.o.d" -MT ${OBJECTDIR}/src/main.o  -o ${OBJECTDIR}/src/main.o src/main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD) 
 	
 endif
 
