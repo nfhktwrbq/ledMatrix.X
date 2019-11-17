@@ -76,12 +76,12 @@ void display_clear(void)
     memset(displayBuffer, 0, sizeof(displayBuffer));
 }
 
-void display_addCharToPosition(char c, uint8_t pos, uint8_t flag)
+void display_addCharToPosition(char c, int8_t pos, uint8_t flag)
 {
     uint8_t line;
     int8_t offset;
     
-    if(pos > MATRIX_NUM * MATRIX_WIDTH)
+    if(pos > MATRIX_NUM * MATRIX_WIDTH || pos < -FONT_WIDTH)
         return;
     
     offset = (MATRIX_NUM * MATRIX_WIDTH - 6 - pos);
@@ -99,13 +99,18 @@ void display_addCharToPosition(char c, uint8_t pos, uint8_t flag)
     }
 }
 
-void display_setText(char * str, uint8_t startBit)
+void display_setText(char * str, int16_t startBit)
 {
     display_clear();
-    uint8_t startCharIndex = startBit / (FONT_WIDTH + LETTER_SPACE);
-    for(uint8_t i = 0; str[startCharIndex + i] != 0 && (FONT_WIDTH + LETTER_SPACE) * i + startBit < MATRIX_NUM * MATRIX_WIDTH; i++)
+    uint8_t startCharIndex = 0;
+    if(startBit <= 0 )
     {
-        display_addCharToPosition(str[startCharIndex + i], (FONT_WIDTH + LETTER_SPACE) * i + startBit, 0);
+        startCharIndex = -startBit / (FONT_WIDTH + LETTER_SPACE);
+    }
+    
+    for(uint8_t i = startCharIndex; str[i] != 0 && (FONT_WIDTH + LETTER_SPACE) * i + startBit < MATRIX_NUM * MATRIX_WIDTH; i++)
+    {
+        display_addCharToPosition(str[i], (FONT_WIDTH + LETTER_SPACE) * i + startBit, 0);
     }
 }
 /*

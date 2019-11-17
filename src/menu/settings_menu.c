@@ -25,17 +25,6 @@ void printText(char * str)
 void menu_init(void)
 {
    SET_MENU_WRITE_FUNC(printText);
-   printText("1");
-   _delay_ms(2000);
    SET_MENU(Level1Item1); 
-   _delay_ms(2000);
-   printText("0");
-   _delay_ms(2000);
-   SET_MENU(NEXT);
-   _delay_ms(2000);
-   printText("0");
-   _delay_ms(2000);
-   SET_MENU(NEXT);
-   while(1){};
 }
 

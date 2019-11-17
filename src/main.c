@@ -97,6 +97,18 @@ int main(void) {
     
     //_delay_ms(2000);
     
+    for(int8_t i = 0; i <15; i++)
+    {
+        display_setText("abctpmo", i);
+        display_show();
+        _delay_ms(800);
+    }
+    for(int8_t i = -0; i != -16; i--)
+    {
+        display_setText("abctpmo", i);
+        display_show();
+        _delay_ms(800);
+    }
     
     while(1)
     {
