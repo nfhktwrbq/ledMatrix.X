@@ -9,8 +9,24 @@
 	                                  */
 
 #include "Menu.h"
+#include "resource.h"
 
-Menu_Item        Null_Menu = {(void*)0, (void*)0, (void*)0, (void*)0, (void*)0, (void*)0, {0x00}};
+const char string_1[] PROGMEM = EMPTY_STR;
+const char string_2[] PROGMEM = MENU_STR;
+const char string_3[] PROGMEM = MENU_STR;
+const char string_4[] PROGMEM = MENU_STR;
+const char string_5[] PROGMEM = MENU_STR;
+
+PGM_P const menu_string_table[] PROGMEM = 
+{
+    string_1,
+    string_2,
+    string_3,
+    string_4,
+    string_5
+};
+
+Menu_Item        Null_Menu = {(void*)0, (void*)0, (void*)0, (void*)0, (void*)0, (void*)0, 0x00};
 Menu_Item*       CurrMenuItem;
 WriteFuncPtr*    WriteFunc;
 
@@ -30,7 +46,11 @@ void MenuChange(Menu_Item* NewMenu)
 		strcpy_P(Buffer, CurrMenuItem->Text);
 
 		((WriteFuncPtr)WriteFunc)((const char*)Buffer);
-	#else
+    #elif MENU_USE_STRING_ARRAY
+        char Buffer[STRING_ARRAY_BUFFER_SIZE];
+		strcpy_P(Buffer, (PGM_P)pgm_read_word(&(menu_string_table[CurrMenuItem->stringNum])));
+		((WriteFuncPtr)WriteFunc)((const char*)Buffer);
+    #else
 		((WriteFuncPtr)WriteFunc)((const char*)CurrMenuItem->Text);	
 	#endif
 

@@ -4,11 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/nbproject/Makefile-default.mk</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/menu/settings_menu.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/bme280.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/interfaces/twi.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bmp280.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/mhz19b.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/timer.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/menu/Menu.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/ring_buffer.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/debug.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/bmp280.c</file>
@@ -19,6 +21,7 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/bmp.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/buttons.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/interfaces/spi.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/menu/settings_menu.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/interfaces/uart.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/timer.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/display/matrix.h</file>

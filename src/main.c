@@ -22,6 +22,8 @@
 #include "twi.h"
 #include "bme.h"
 #include "buttons.h"
+#include "settings_menu.h"
+#include "Menu.h"
 
 #ifdef DEBUG
 #include "debug.h"
@@ -34,6 +36,8 @@ char * dtoa(double n, char *s);
 void buttonsTest(void);
 void buttonsTestLong(void);
 void buttonTestNumber(void);
+
+void menuTest(void);
 /*
  * 
  */
@@ -52,6 +56,8 @@ int main(void) {
     mhz19b_init();
     timer0_init();
     bme_init();
+    buttons_init();
+    menu_init();
     
     uint32_t * buf = display_getBuffer();
     buf[0] = 0x01;
@@ -90,11 +96,11 @@ int main(void) {
     //co2 test begin
     
     //_delay_ms(2000);
-    buttons_init();
+    
     
     while(1)
     {
-        buttonsTestLong();
+        menuTest();
     }
     
     
@@ -158,6 +164,31 @@ void buttonTestNumber(void)
         display_show();
     }
 }
+
+void menuTest(void)
+{
+    if(buttons_getPress(BUTTON_ENTER))
+    {
+        GO_MENU_FUNC(SELECTFUNC);
+    }
+    if(buttons_getPress(BUTTON_UP))
+    {
+        SET_MENU(PREVIOUS);
+    }
+    if(buttons_getPress(BUTTON_DOWN))
+    {
+        SET_MENU(NEXT);
+    }
+    if(buttons_getPress(BUTTON_LEFT))
+    {
+        SET_MENU(PARENT);
+    }
+    if(buttons_getPress(BUTTON_RIGHT))
+    {
+        SET_MENU(SIBLING);
+    }
+}
+
 
 void buttonsTestLong(void)
 {

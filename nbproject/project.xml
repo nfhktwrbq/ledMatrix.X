@@ -12,7 +12,10 @@
             <asminc-extensions/>
             <sourceEncoding>windows-1251</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>src/menu</sourceRootElem>
+                <sourceRootElem>include/menu</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>default</name>

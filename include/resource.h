@@ -13,7 +13,9 @@ extern "C" {
 #endif
 
 #define TEST_STRING "хуй тебе"
-
+    
+#define MENU_STR    "AAA"
+#define EMPTY_STR   ""
 
 #ifdef	__cplusplus
 }
