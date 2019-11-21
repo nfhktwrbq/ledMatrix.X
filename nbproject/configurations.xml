@@ -25,6 +25,9 @@
       <itemPath>include/utils/timer.h</itemPath>
       <itemPath>include/utils/ring_buffer.h</itemPath>
       <itemPath>include/menu/settings_menu.h</itemPath>
+      <itemPath>include/memory/at24c32.h</itemPath>
+      <itemPath>include/memory/settings_table.h</itemPath>
+      <itemPath>include/memory/settings.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -52,6 +55,8 @@
       <itemPath>src/utils/timer.c</itemPath>
       <itemPath>src/main.c</itemPath>
       <itemPath>src/menu/settings_menu.c</itemPath>
+      <itemPath>src/memory/at24c32.c</itemPath>
+      <itemPath>src/memory/settings.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -62,6 +67,8 @@
   <sourceRootList>
     <Elem>src/menu</Elem>
     <Elem>include/menu</Elem>
+    <Elem>include/memory</Elem>
+    <Elem>src/memory</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -151,7 +158,7 @@
         <property key="default-bitfield-type" value="true"/>
         <property key="default-char-type" value="true"/>
         <property key="extra-include-directories"
-                  value="include;include/display;include/interfaces;include/menu;include/sensors;include/utils"/>
+                  value="include;include/display;include/interfaces;include/menu;include/sensors;include/utils;include/memory"/>
         <property key="extra-warnings" value="false"/>
         <property key="garbage-collect-data" value="true"/>
         <property key="garbage-collect-functions" value="true"/>
