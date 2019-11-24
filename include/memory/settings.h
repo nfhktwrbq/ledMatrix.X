@@ -16,12 +16,31 @@ extern "C" {
 
 #define MAX_SETTING_SIZE 3
     
+#define SETTING_DEF(type, name,...)		SETTING_##name,
+#define SETTING_DEF3(type, name,...)		SETTING_##name,
+
+typedef enum
+{
+	//__setting_00,
+    #include "settings_table.h"
+}	TSetting;
+
+#undef SETTING_DEF
+#undef SETTING_DEF3    
+    
+    
 typedef struct __attribute__ ((packed))
 {
 	uint16_t	offset;				
 	uint8_t     len;			
 } T_TableAttr;
 
+void setting_getAttribute(TSetting setting, T_TableAttr * attr);
+void setting_getMin(TSetting setting, uint8_t * data);
+void setting_getMax(TSetting setting, uint8_t * data);
+void setting_getDef(TSetting setting, uint8_t * data);
+void setting_get(TSetting setting, uint8_t * data);
+void setting_set(TSetting setting, uint8_t * data);
 
 #ifdef	__cplusplus
 }

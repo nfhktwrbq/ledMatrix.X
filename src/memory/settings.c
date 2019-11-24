@@ -1,5 +1,8 @@
 #include <string.h>
 
+#include <avr/pgmspace.h>
+#include <util/delay.h>
+
 #include "settings.h"
 #include "clock.h"
 #include "at24c32.h"
@@ -7,6 +10,7 @@
 #define offsetof(st, m) ((size_t)&(((st *)0)->m))
 #define sizein(st, m) (sizeof(((st *)0)->m))
 #define	ADDR(x)					(&(x))
+#define MAX_SETTING_LEN   3
 
 #define SETTING_DEF(type, name,...)		type		name;
 #define SETTING_DEF3(type, name,...)		type		name;
@@ -71,48 +75,80 @@ const T_Table tableMax PROGMEM =
 #undef SETTING_DEF
 #undef SETTING_DEF3
 
-#define SETTING_DEF(type, name,...)		SETTING_##name,
-#define SETTING_DEF3(type, name,...)		SETTING_##name,
-
-typedef enum
-{
-	//__setting_00,
-    #include "settings_table.h"
-}	TSetting;
-
-#undef SETTING_DEF
-#undef SETTING_DEF3
-
 #define	TABLE_DEF(field)		((uint8_t *) (ADDR(tableDef.S)  + tableAttr[field].offset))
 #define	TABLE_MIN(field)		((uint8_t *) (ADDR(tableMin) + tableAttr[field].offset))
 #define	TABLE_MAX(field)		((uint8_t *) (ADDR(tableMax) + tableAttr[field].offset))
 
-void settings_get(TSetting setting, uint8_t * data)
+void setting_getAttribute(TSetting setting, T_TableAttr * attr)
+{    
+    memcpy_P(attr, &tableAttr[setting], sizeof(T_TableAttr));
+}
+
+void setting_getMin(TSetting setting, uint8_t * data)
 {
-    T_TableAttr attr = tableAttr[setting];
+    T_TableAttr attr;
+    setting_getAttribute(setting, &attr);
+    memcpy_P(data, ((uint8_t *)(&tableMin) + attr.offset), attr.len);
+}
+
+void setting_getMax(TSetting setting, uint8_t * data)
+{
+    T_TableAttr attr;
+    setting_getAttribute(setting, &attr);
+    memcpy_P(data, ((uint8_t *)(&tableMax) + attr.offset), attr.len);
+}
+
+void setting_getDef(TSetting setting, uint8_t * data)
+{
+    T_TableAttr attr;
+    setting_getAttribute(setting, &attr);
+    memcpy_P(data, ((uint8_t *)(&tableDef) + attr.offset + sizein(T_TableCont, crc)), attr.len);
+}
+
+void setting_get(TSetting setting, uint8_t * data)
+{
+    T_TableAttr attr;
+    uint8_t settingMin[MAX_SETTING_LEN];
+    uint8_t settingMax[MAX_SETTING_LEN];
+    uint8_t settingDef[MAX_SETTING_LEN];
+    
+    setting_getAttribute(setting, &attr);     
+    setting_getMin(setting, settingMin);
+    setting_getMax(setting, settingMax);
+    setting_getDef(setting, settingDef);
+    
     at24c32_readBytes(AT24C32_ADDR, attr.offset, data, attr.len);
     for(uint8_t i = 0; i < attr.len; i++)
     {         
-        if(data[i] < TABLE_MIN(setting)[i] || data[i] > TABLE_MAX(setting)[i])
+        if(data[i] < settingMin[i] || data[i] > settingMax[i])
         {
-            data[i] = TABLE_DEF(setting)[i];
+            data[i] = settingDef[i];
         }
     }
 }
 
 void setting_set(TSetting setting, uint8_t * data)
 {
-    T_TableAttr attr = tableAttr[setting];
-    uint8_t buf[MAX_SETTING_SIZE];
+    T_TableAttr attr;
+    uint8_t settingMin[MAX_SETTING_LEN];
+    uint8_t settingMax[MAX_SETTING_LEN];
+    uint8_t settingDef[MAX_SETTING_LEN];
+    
+    setting_getAttribute(setting, &attr);     
+    setting_getMin(setting, settingMin);
+    setting_getMax(setting, settingMax);
+    setting_getDef(setting, settingDef);
+    
     for(uint8_t i = 0; i < attr.len; i++)
     {         
-        if(data[i] < TABLE_MIN(setting)[i] || data[i] > TABLE_MAX(setting)[i])
+        if(data[i] < settingMin[i] || data[i] > settingMax[i])
         {
-            data[i] = TABLE_DEF(setting)[i];
+            data[i] = settingDef[i];
         }
     }
-    settings_get(setting, buf);
-    if(!memcmp(buf, data, attr.len))
+    
+    setting_get(setting, settingDef);
+    if(memcmp(settingDef, data, attr.len))
     {
         at24c32_writeBytes(AT24C32_ADDR, attr.offset, data, attr.len);
     }
