@@ -17,6 +17,8 @@
                 <sourceRootElem>include/menu</sourceRootElem>
                 <sourceRootElem>include/memory</sourceRootElem>
                 <sourceRootElem>src/memory</sourceRootElem>
+                <sourceRootElem>src/utils</sourceRootElem>
+                <sourceRootElem>include/utils</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

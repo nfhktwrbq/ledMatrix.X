@@ -208,6 +208,7 @@ void settings_test(void)
     display_show();
     _delay_ms(2000);
     
+    //
     //at24c32_writeBytes(AT24C32_ADDR, attr.offset, (uint8_t *)&time, attr.len); 
     //at24c32_writeBytes(AT24C32_ADDR, 0, (uint8_t *)"teck", 4);
     //at24c32_writeBytes(AT24C32_ADDR, 20, (uint8_t *)"teck", 4);

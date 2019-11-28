@@ -28,6 +28,7 @@
       <itemPath>include/memory/at24c32.h</itemPath>
       <itemPath>include/memory/settings_table.h</itemPath>
       <itemPath>include/memory/settings.h</itemPath>
+      <itemPath>include/utils/utils.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -57,6 +58,7 @@
       <itemPath>src/menu/settings_menu.c</itemPath>
       <itemPath>src/memory/at24c32.c</itemPath>
       <itemPath>src/memory/settings.c</itemPath>
+      <itemPath>src/utils/utils.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -69,6 +71,8 @@
     <Elem>include/menu</Elem>
     <Elem>include/memory</Elem>
     <Elem>src/memory</Elem>
+    <Elem>src/utils</Elem>
+    <Elem>include/utils</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
