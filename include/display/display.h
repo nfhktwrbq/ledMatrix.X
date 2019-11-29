@@ -32,6 +32,9 @@ void display_clear(void);
 void display_rollTimeText1(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame);
 void display_rollTimeText2(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame);
 void test_rool(void);
+void display_clearTimeDigit(uint8_t digit);
+void display_partiallyClear(uint32_t part);
+void display_clockColonSwitch(bool isOn);
 
 #ifdef	__cplusplus
 }

@@ -34,3 +34,58 @@ void clock_getTime(TTime * time)
     getDataReg(&clk);
     memcpy(time, &clk.time, sizeof(clk));
 }
+
+static uint8_t digitChange(uint8_t digit, int8_t diff, uint8_t digitMax)
+{
+    int8_t tmp;
+    tmp = (digit + diff) % (digitMax + 1);
+    if(tmp < 0)
+        tmp = (digitMax + 1) + tmp;
+    return (uint8_t) tmp;
+}
+
+void clock_changeTime(TTime * time, int8_t diff, uint8_t timeFormat, TIME_POS pos)
+{
+    switch(pos)
+    {
+        case SECOND_UNITS:
+            time->seconds = (time->seconds & 0xf0) + digitChange(time->seconds & 0x0f, diff, SECOND_UNITS_MAX);
+        break;
+        case SECOND_TENS:
+            time->seconds = (time->seconds & 0x0f) + (digitChange(time->seconds >> 4, diff, SECOND_TENS_MAX) << 4);
+        break;
+        case MINUTE_UNITS:
+            time->minutes = (time->minutes & 0xf0) + digitChange(time->minutes & 0x0f, diff, MINUTE_UNITS_MAX);
+        break;
+        case MINUTE_TENS:
+            time->minutes = (time->minutes & 0x0f) + (digitChange(time->minutes >> 4, diff, MINUTE_TENS_MAX ) << 4);
+        break;
+        case HOUR_UNITS:
+            time->hours = (time->hours & 0xf0) + digitChange(time->hours & 0x0f, diff, HOUR_UNITS_MAX);
+            if(timeFormat == TIME_FORMAT_24)
+            {
+                if((time->hours & 0x0f) > 4 && (time->hours >> 4) == 2)
+                {
+                    time->hours &= 0x0f;      
+                }
+            }
+            if(timeFormat == TIME_FORMAT_12)
+            {
+                if((time->hours & 0x0f) > 2 && (time->hours >> 4) == 1)
+                {
+                    time->hours &= 0x0f;      
+                }
+            }
+        break;
+        case HOUR_TENS:
+            if(timeFormat == TIME_FORMAT_24)
+            {
+                time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_24 ) << 4);
+            }
+            if(timeFormat == TIME_FORMAT_12)
+            {
+                time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_12 ) << 4);
+            }
+        break;
+    }
+}

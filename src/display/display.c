@@ -173,6 +173,25 @@ void display_partiallyClear(uint32_t part)
     }
 }
 
+void display_clearTimeDigit(uint8_t digit)
+{
+    switch(digit)
+    {
+        case 0:
+            display_partiallyClear(0x000000ff);
+        break;
+        case 1:
+            display_partiallyClear(0x00007f00);
+        break;
+        case 2:
+            display_partiallyClear(0x00fe0000);
+        break;
+        case 3:
+            display_partiallyClear(0xff000000);
+        break;
+    }
+}
+
 void display_setTimeText(uint8_t hoursBCD, uint8_t minutesBCD)
 {
     curHours = hoursBCD;

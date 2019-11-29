@@ -12,8 +12,8 @@
 extern "C" {
 #endif
 
-
-
+#define ENTER_TIME_BUTTONS_TIMEOUT	15000
+#define ENTER_TIME_BLINK_TIMEOUT	400
 
 #ifdef	__cplusplus
 }

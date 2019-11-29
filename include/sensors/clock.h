@@ -15,6 +15,14 @@ extern "C" {
 #include <inttypes.h>
     
 #define DS1307_ADDR 0x68
+
+#define SECOND_UNITS_MAX    9
+#define SECOND_TENS_MAX     5
+#define MINUTE_UNITS_MAX    9
+#define MINUTE_TENS_MAX    5
+#define HOUR_UNITS_MAX    9
+#define HOUR_TENS_MAX_24    2
+#define HOUR_TENS_MAX_12    1
     
 typedef struct __attribute__ ((packed))
 {
@@ -43,6 +51,22 @@ typedef struct __attribute__ ((packed))
     uint8_t addr;
     TClock data;
 } TClockTWICont;
+
+typedef enum
+{
+    SECOND_UNITS,
+    SECOND_TENS,
+    MINUTE_UNITS,
+    MINUTE_TENS,
+    HOUR_UNITS,
+    HOUR_TENS,
+} TIME_POS;
+
+typedef enum
+{
+    TIME_FORMAT_12,
+    TIME_FORMAT_24,
+} TIME_FORMAT;
 
 void clock_init(void);
 void clock_getTime(TTime * time);
