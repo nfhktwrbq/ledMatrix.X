@@ -12,6 +12,9 @@
 extern "C" {
 #endif
 
+#include <stdbool.h>
+#include <inttypes.h>
+    
 #define DDR_BUTTON_ENTER    DDRB
 #define DDR_BUTTON_UP       DDRD
 #define DDR_BUTTON_DOWN     DDRD
@@ -36,7 +39,8 @@ extern "C" {
     
 typedef enum 
 {
- BUTTON_ENTER  = 1,
+ BUTTON_NONE = 0,  
+ BUTTON_ENTER,
  BUTTON_UP,
  BUTTON_DOWN,
  BUTTON_LEFT,

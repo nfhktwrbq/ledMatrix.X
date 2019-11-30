@@ -52,7 +52,7 @@ uint8_t buttons_getPressNumber(void)
         return  BUTTON_LEFT;
     if(PIN_BUTTON_RIGHT & BUTTON_RIGHT_BIT)
         return  BUTTON_RIGHT;
-    return 0;
+    return BUTTON_NONE;
 }
 
 void buttons_proc(void)

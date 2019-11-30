@@ -12,9 +12,15 @@
 extern "C" {
 #endif
 
+#include "clock.h"  
+    
 #define ENTER_TIME_BUTTONS_TIMEOUT	15000
 #define ENTER_TIME_BLINK_TIMEOUT	400
 
+#define ENTER_TIME_BUTTONS_TIMEOUT_ERR  (-1)   
+    
+int enterTime(TTime * time, uint8_t timeFormat);    
+    
 #ifdef	__cplusplus
 }
 #endif

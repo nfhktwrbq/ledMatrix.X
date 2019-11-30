@@ -27,6 +27,7 @@
 #include "Menu.h"
 #include "at24c32.h"
 #include "settings.h"
+#include "utils.h"
 
 #ifdef DEBUG
 #include "debug.h"
@@ -51,7 +52,7 @@ void settings_test(void);
 int main(void) {
 
     char dest[20];
-//    TTime time;
+    TTime time;
 	strcpy_P(dest, PSTR(TEST_STRING));
     
     DDRB |= 0b00000010;
@@ -104,6 +105,10 @@ int main(void) {
     
     //_delay_ms(2000);
     //eeprom_test();
+    
+    enterTime(&time, TIME_FORMAT_24);
+            
+    while(1){};
     settings_test();
     while(1){};
     

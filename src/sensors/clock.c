@@ -44,7 +44,7 @@ static uint8_t digitChange(uint8_t digit, int8_t diff, uint8_t digitMax)
     return (uint8_t) tmp;
 }
 
-void clock_changeTime(TTime * time, int8_t diff, uint8_t timeFormat, TIME_POS pos)
+void clock_changeTime(TTime * time, int8_t diff, TIME_FORMAT timeFormat, TIME_POS pos)
 {
     switch(pos)
     {
@@ -80,11 +80,18 @@ void clock_changeTime(TTime * time, int8_t diff, uint8_t timeFormat, TIME_POS po
         case HOUR_TENS:
             if(timeFormat == TIME_FORMAT_24)
             {
-                time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_24 ) << 4);
+                time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_24 ) << 4);if((time->hours >> 4) == 2 && (time->hours & 0x0f) > 4)
+                {
+                    time->hours &= 0xf0;  
+                }
             }
             if(timeFormat == TIME_FORMAT_12)
             {
                 time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_12 ) << 4);
+                if((time->hours >> 4) == 1 && (time->hours & 0x0f) > 2)
+                {
+                    time->hours &= 0xf0;  
+                }
             }
         break;
     }
