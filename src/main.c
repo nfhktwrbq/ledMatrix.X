@@ -60,11 +60,13 @@ int main(void) {
     
     TWI_MasterInit(100);
     display_init();
-    clock_init();
     mhz19b_init();
     timer0_init();
+    clock_init();
     bme_init();
     buttons_init();
+    
+    
     menu_init();
     
     uint32_t * buf = display_getBuffer();
@@ -106,7 +108,18 @@ int main(void) {
     //_delay_ms(2000);
     //eeprom_test();
     
-    enterTime(&time, TIME_FORMAT_24);
+    clock_getTime(&time);
+    if(!enterTime(&time, TIME_FORMAT_24))
+    {    
+        clock_setTime(&time);
+    }
+    while(1)
+    {
+        clock_getTime(&time);
+        display_setTimeText(time.hours, time.minutes);
+        display_show();
+        _delay_ms(2000);
+    }
             
     while(1){};
     settings_test();

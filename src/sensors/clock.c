@@ -22,10 +22,26 @@ static void getDataReg(TClock * clk)
     memcpy(clk, &(clockCont.data), sizeof(TClock));
 }
 
+static void setDataReg(TClock * clk)
+{
+    TClockTWICont clockCont;
+    clockCont.addr = (DS1307_ADDR << 1) | 0; 
+    clockCont.data.time.seconds = 0; //reset pointer
+    TWI_SendData((uint8_t *)&clockCont, 2);
+    
+    memcpy(&clockCont.data, clk, sizeof(TClock));    
+    TWI_SendData((uint8_t *)&clockCont, sizeof(TClockTWICont));
+}
 
 void clock_init(void)
 {
-    
+   TClock clk;
+    getDataReg(&clk);
+    if(clk.time.seconds & 0x80)
+    {
+        clk.time.seconds &= ~0x80;
+        setDataReg(&clk);
+    }
 }
 
 void clock_getTime(TTime * time)
@@ -33,6 +49,14 @@ void clock_getTime(TTime * time)
     TClock clk;
     getDataReg(&clk);
     memcpy(time, &clk.time, sizeof(clk));
+}
+
+void clock_setTime(TTime * time)
+{
+    TClock clk;
+    getDataReg(&clk);
+    memcpy(&clk.time, time, sizeof(TTime));
+    setDataReg(&clk);
 }
 
 static uint8_t digitChange(uint8_t digit, int8_t diff, uint8_t digitMax)

@@ -11,6 +11,7 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bmp280.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/display/font.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/memory/settings.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/debug.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/mhz19b.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/timer.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/menu/Menu.h</file>
