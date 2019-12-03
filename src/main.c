@@ -28,6 +28,7 @@
 #include "at24c32.h"
 #include "settings.h"
 #include "utils.h"
+#include "adc.h"
 
 #ifdef DEBUG
 #include "debug.h"
@@ -62,10 +63,11 @@ int main(void) {
     display_init();
     mhz19b_init();
     timer0_init();
+    timer1_init();
     clock_init();
     bme_init();
     buttons_init();
-    
+    adc_init();
     
     menu_init();
     

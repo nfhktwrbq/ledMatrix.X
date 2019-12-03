@@ -35,6 +35,7 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/buttons.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/mhz19b.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/Makefile</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/adc.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/main.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/clock.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bme.h</file>
@@ -47,6 +48,7 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bmp.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/menu/Menu.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/bme.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/adc.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/interfaces/twi.h</file>
         </group>
     </open-files>

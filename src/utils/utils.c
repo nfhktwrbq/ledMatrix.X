@@ -6,6 +6,22 @@
 #include "display.h"
 #include "clock.h"
  
+static uint32_t hwOperFlags = 0;
+
+void setOperFlag(uint32_t flag)
+{
+    hwOperFlags |= flag;
+}
+
+bool getOperFlag(uint32_t flag)
+{
+    return hwOperFlags & flag;
+}
+
+void clearOperFlag(uint32_t flag)
+{
+    hwOperFlags &= ~flag;
+}
 
 int enterTime(TTime * time, TIME_FORMAT timeFormat)
 {
@@ -14,7 +30,8 @@ int enterTime(TTime * time, TIME_FORMAT timeFormat)
 	uint8_t enterPos = 0;
 	uint8_t blinkFlag = 0;
     bool enterPressFlag = true;
-    uint8_t pressedButton, prevPressedButton;
+    uint8_t pressedButton;
+    uint8_t prevPressedButton = 0;
 
 	timer_start(&buttonsTimeout, ENTER_TIME_BUTTONS_TIMEOUT);
 	timer_start(&blinkTimer, ENTER_TIME_BLINK_TIMEOUT);

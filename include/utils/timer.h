@@ -23,6 +23,7 @@ typedef struct __attribute__ ((packed))
 } TTimer;
 
 void timer0_init(void);
+void timer1_init(void);
 void timer_start(TTimer * timer, uint32_t timeout);
 bool timer_check(TTimer * timer);
 void timer_stop(TTimer * timer);
