@@ -68,6 +68,7 @@ int main(void) {
     bme_init();
     buttons_init();
     adc_init();
+    setting_init();
     
     menu_init();
     

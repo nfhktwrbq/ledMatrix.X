@@ -6,6 +6,7 @@
 #include "settings.h"
 #include "clock.h"
 #include "at24c32.h"
+#include "utils.h"
 
 #define offsetof(st, m) ((size_t)&(((st *)0)->m))
 #define sizein(st, m) (sizeof(((st *)0)->m))
@@ -153,3 +154,19 @@ void setting_set(TSetting setting, uint8_t * data)
         at24c32_writeBytes(AT24C32_ADDR, attr.offset, data, attr.len);
     }
 }
+
+void setting_init(void)
+{
+    uint8_t calcCrc;
+    T_TableCont defsTableCont;
+    memcpy_P(&defsTableCont, (uint8_t *)(&tableDef), sizeof(T_TableCont));
+
+    calcCrc = crc8(&defsTableCont.S, sizeof(T_Table));
+
+    if(calcCrc != defsTableCont.crc)
+    {
+        defsTableCont.crc = calcCrc;
+        at24c32_writeBytes(AT24C32_ADDR, 0, &defsTableCont, sizeof(T_TableCont));
+    }
+}
+

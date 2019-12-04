@@ -41,6 +41,7 @@ void setting_getMax(TSetting setting, uint8_t * data);
 void setting_getDef(TSetting setting, uint8_t * data);
 void setting_get(TSetting setting, uint8_t * data);
 void setting_set(TSetting setting, uint8_t * data);
+void setting_init(void);
 
 #ifdef	__cplusplus
 }

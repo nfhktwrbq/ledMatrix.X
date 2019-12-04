@@ -26,7 +26,8 @@ bool getOperFlag(uint32_t flag);
 void setOperFlag(uint32_t flag);
 
 int enterTime(TTime * time, uint8_t timeFormat);    
-    
+uint8_t crc8(uint8_t *pcBlock, uint16_t len);
+
 #ifdef	__cplusplus
 }
 #endif
