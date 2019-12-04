@@ -13,6 +13,7 @@
 //
 //***************************************************************************
 #include "twi.h"
+#include "timer.h"
 
 #define TWSR_MASK     0xfc  
 
@@ -57,7 +58,14 @@ static uint8_t TWI_TransceiverBusy(void)
 ****************************************************************************/
 uint8_t TWI_GetState(void)
 {
-  while (TWI_TransceiverBusy());             
+  TTimer timer;
+  timer_start(&timer, TWI_TIMEOUT);
+  while (TWI_TransceiverBusy() && !timer_check(&timer));
+
+  if(timer_check(&timer))  
+  {
+    twiState = TWI_TIMEOUT_EXCEEDED;
+  }           
   return twiState;                        
 }
 
@@ -67,8 +75,14 @@ uint8_t TWI_GetState(void)
 void TWI_SendData(uint8_t *msg, uint8_t msgSize)
 {
   uint8_t i;
-
-  while(TWI_TransceiverBusy());   //ждем, когда TWI модуль освободится             
+  TTimer timer;
+  timer_start(&timer, TWI_TIMEOUT);
+  while(TWI_TransceiverBusy() && !timer_check(&timer));   //ждем, когда TWI модуль освободится             
+  if(timer_check(&timer))  
+  {
+    twiState = TWI_TIMEOUT_EXCEEDED;
+    return twiState;
+  }  
 
   twiMsgSize = msgSize;           //сохряняем кол. байт для передачи             
   twiBuf[0]  = msg[0];            //и первый байт сообщения 
@@ -89,9 +103,15 @@ void TWI_SendData(uint8_t *msg, uint8_t msgSize)
 uint8_t TWI_GetData(uint8_t *msg, uint8_t msgSize)
 {
   uint8_t i;
-
-  while(TWI_TransceiverBusy());    //ждем, когда TWI модуль освободится 
-
+  TTimer timer;
+  timer_start(&timer, TWI_TIMEOUT);
+  while(TWI_TransceiverBusy() && !timer_check(&timer));    //ждем, когда TWI модуль освободится 
+  if(timer_check(&timer))  
+  {
+    twiState = TWI_TIMEOUT_EXCEEDED;
+    return twiState;
+  } 
+  
   if(twiState == TWI_SUCCESS){     //если сообщение успешно принято,                         
     for(i = 0; i < msgSize; i++){  //то переписываем его из внутреннего буфера в переданный
       msg[i] = twiBuf[i];
