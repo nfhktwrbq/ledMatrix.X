@@ -33,7 +33,7 @@ static void setDataReg(TClock * clk)
     TWI_SendData((uint8_t *)&clockCont, sizeof(TClockTWICont));
 }
 
-void clock_init(void)
+uint8_t clock_init(void)
 {
    TClock clk;
     getDataReg(&clk);
@@ -42,6 +42,7 @@ void clock_init(void)
         clk.time.seconds &= ~0x80;
         setDataReg(&clk);
     }
+    return TWI_GetState();
 }
 
 void clock_getTime(TTime * time)
