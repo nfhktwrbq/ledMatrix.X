@@ -19,7 +19,7 @@ ISR(ADC_vect)
 
 void adc_init(void)
 {
-    ADMUX = (1 << REFS0) | (1 << ADLAR);
+    ADMUX = (1 << REFS0) | (1 << ADLAR); //adc0
     ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE);
     ADCSRB = (1 << ADTS2) | (1 << ADTS1); //timer1 ovfl
 }

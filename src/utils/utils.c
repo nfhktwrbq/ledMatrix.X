@@ -6,21 +6,21 @@
 #include "display.h"
 #include "clock.h"
  
-static uint32_t hwOperFlags = 0;
+static uint32_t hardwareState = 0;
 
-void setOperFlag(uint32_t flag)
+void setHardwareState(HwBit hwBit)
 {
-    hwOperFlags |= flag;
+    hardwareState |= (uint32_t)(1 << hwBit);
 }
 
-bool getOperFlag(uint32_t flag)
+void clearHardwareState(HwBit hwBit)
 {
-    return hwOperFlags & flag;
+    hardwareState &= ~((uint32_t)(1 << hwBit));
 }
 
-void clearOperFlag(uint32_t flag)
+bool getHardwareState(HwBit hwBit)
 {
-    hwOperFlags &= ~flag;
+    return (hardwareState &((uint32_t)(1 << hwBit)));
 }
 
 int enterTime(TTime * time, TIME_FORMAT timeFormat)

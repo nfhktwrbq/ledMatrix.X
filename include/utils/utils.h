@@ -21,9 +21,17 @@ extern "C" {
 
 #define ENTER_TIME_BUTTONS_TIMEOUT_ERR  (-1)   
   
-void clearOperFlag(uint32_t flag);
-bool getOperFlag(uint32_t flag);
-void setOperFlag(uint32_t flag);
+typedef enum HwBit
+{
+	HW_CLOCK_OK = 0,
+	HW_EEPROM_OK,
+	HW_BME_OK,
+	HW_MHZ19B_OK,
+} HwBit;
+
+void setHardwareState(HwBit hwBit);
+void clearHardwareState(HwBit hwBit);
+bool getHardwareState(HwBit hwBit);
 
 int enterTime(TTime * time, uint8_t timeFormat);    
 uint8_t crc8(uint8_t *pcBlock, uint16_t len);

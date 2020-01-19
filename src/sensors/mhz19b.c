@@ -5,6 +5,8 @@
 #include "ring_buffer.h"
 
 static uint16_t co2concentration;
+static uint8_t mhz19b_state = 0;
+
 
 typedef enum{
     NONE,
@@ -75,6 +77,7 @@ void mhz19b_proc(void)
 {
     static TMHZ19B_State state = NONE;
     static TTimer mhz19b_timer;
+    static uint8_t zeroLenAnswerCount = 0;
     
     switch(state){
         case NONE:
@@ -86,7 +89,7 @@ void mhz19b_proc(void)
             state = WAIT_FOR_ANSWER;
             break;
         case WAIT_FOR_ANSWER:
-            if(timer_check(&mhz19b_timer))
+            if(timer_check(&mhz19b_timer) && mhz19b_state == MHZ19B_OK)
             {
                 uint8_t answ[RING_BUFFER_SIZE + 1];
                 uint8_t len;
@@ -101,6 +104,18 @@ void mhz19b_proc(void)
                         pch += 2;
                         co2concentration = pch[0] * 256 + pch[1];
                     }
+                    mhz19b_state = 0;
+                }
+                else
+                {
+                    if(zeroLenAnswerCount < 10)
+                    {
+                        zeroLenAnswerCount++;
+                        if(zeroLenAnswerCount == 10)
+                        {
+                            mhz19b_state = MHZ19B_NOT_ANSWER;
+                        }
+                    }
                 }
                 state = START_MEASURE;
             }            
@@ -113,4 +128,9 @@ void mhz19b_proc(void)
 uint16_t mhz19b_getCO2Concentration(void)
 {  
     return co2concentration;
+}
+
+uint8_t mhz19b_getState(void)
+{
+    return mhz19b_state;
 }

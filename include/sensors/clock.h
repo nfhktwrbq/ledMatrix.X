@@ -69,8 +69,8 @@ typedef enum
 } TIME_FORMAT;
 
 uint8_t clock_init(void);
-void clock_setTime(TTime * time);
-void clock_getTime(TTime * time);
+uint8_t clock_setTime(TTime * time);
+uint8_t clock_getTime(TTime * time);
 void clock_changeTime(TTime * time, int8_t diff, TIME_FORMAT timeFormat, TIME_POS pos);
 
 #ifdef	__cplusplus

@@ -55,10 +55,10 @@
 
 /*Äðóãèå ñòàòóñíûå êîäû*/
 #define TWI_NO_STATE               0xF8  // íåîïðåäåëåííîå ñîñòîÿíèå; TWINT = “0”
-#define TWI_BUS_ERROR              0x00  // îøèáêà íà øèíå èç-çà íåêîðåêòíûõ ñîñòîÿíèé ÑÒÀÐÒ èëè ÑÒÎÏ
+#define TWI_BUS_ERROR              0xff  // îøèáêà íà øèíå èç-çà íåêîðåêòíûõ ñîñòîÿíèé ÑÒÀÐÒ èëè ÑÒÎÏ
 
 /*Ïîëüçîâàòåëüñêèå êîäû*/
-#define TWI_SUCCESS                0xff
+#define TWI_SUCCESS                0x00
 
 #define TWI_TIMEOUT_EXCEEDED       0xe0
 #define TWI_TIMEOUT 			   5000

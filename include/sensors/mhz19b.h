@@ -27,6 +27,9 @@ extern "C" {
     
 #define MEASURE_TIMEOUT             2000
 
+#define MHZ19B_OK                   0
+#define MHZ19B_NOT_ANSWER           1  
+    
 typedef struct __attribute__ ((packed))
 {
     uint8_t startByte;
@@ -39,6 +42,7 @@ void mhz19b_init();
 void mhz19b_sendCommand(uint8_t cmd, uint16_t parameter);
 uint16_t mhz19b_getCO2Concentration(void);
 void mhz19b_proc(void);
+uint8_t mhz19b_getState(void);
 
 #ifdef	__cplusplus
 }

@@ -155,18 +155,19 @@ void setting_set(TSetting setting, uint8_t * data)
     }
 }
 
-void setting_init(void)
+uint8_t setting_init(void)
 {
     uint8_t calcCrc;
     T_TableCont defsTableCont;
     memcpy_P(&defsTableCont, (uint8_t *)(&tableDef), sizeof(T_TableCont));
 
-    calcCrc = crc8(&defsTableCont.S, sizeof(T_Table));
+    calcCrc = crc8((uint8_t *)&defsTableCont.S, sizeof(T_Table));
 
     if(calcCrc != defsTableCont.crc)
     {
         defsTableCont.crc = calcCrc;
-        at24c32_writeBytes(AT24C32_ADDR, 0, &defsTableCont, sizeof(T_TableCont));
+        at24c32_writeBytes(AT24C32_ADDR, 0, (uint8_t *)&defsTableCont, sizeof(T_TableCont));
     }
+    return at24c32_getState();
 }
 

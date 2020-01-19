@@ -246,12 +246,12 @@ void display_rollTimeText1(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame)
     }
 }
 
-void display_rollTimeText2(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame)
+bool display_rollTimeText2(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame)
 {
  
     uint8_t line;
     if((curHours == hoursBCD && curMinutes == minutesBCD) || frame > LETTER_SPACE_V + FONT_HEIGHT - 1 )
-        return;
+        return false;
     
     for(uint8_t i = 7; i != 0; i--)
     {
@@ -321,6 +321,7 @@ void display_rollTimeText2(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame)
         curHours = hoursBCD;
         curMinutes = minutesBCD;
     }
+    return true;
 }
 
 void test_rool(void)

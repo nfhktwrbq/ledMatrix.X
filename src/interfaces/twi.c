@@ -81,7 +81,6 @@ void TWI_SendData(uint8_t *msg, uint8_t msgSize)
   if(timer_check(&timer))  
   {
     twiState = TWI_TIMEOUT_EXCEEDED;
-    return twiState;
   }  
 
   twiMsgSize = msgSize;           //сохряняем кол. байт для передачи             

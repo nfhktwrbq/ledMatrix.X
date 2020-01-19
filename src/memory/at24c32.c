@@ -57,3 +57,8 @@ void at24c32_readBytes(uint8_t id, uint16_t mem_addr, uint8_t * data, uint8_t le
     TWI_GetData(buf, len + 1);
     memcpy(data, &buf[1], len);    
 }
+
+uint8_t at24c32_getState(void)
+{
+    return TWI_GetState();
+}

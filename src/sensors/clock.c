@@ -5,7 +5,6 @@
 #include "debug.h"
 
 
-
 static void getDataReg(TClock * clk)
 {
     TClockTWICont clockCont;
@@ -45,19 +44,21 @@ uint8_t clock_init(void)
     return TWI_GetState();
 }
 
-void clock_getTime(TTime * time)
+uint8_t clock_getTime(TTime * time)
 {
     TClock clk;
     getDataReg(&clk);
-    memcpy(time, &clk.time, sizeof(clk));
+    memcpy(time, &clk.time, sizeof(TTime));
+    return TWI_GetState();
 }
 
-void clock_setTime(TTime * time)
+uint8_t clock_setTime(TTime * time)
 {
     TClock clk;
     getDataReg(&clk);
     memcpy(&clk.time, time, sizeof(TTime));
     setDataReg(&clk);
+    return TWI_GetState();
 }
 
 static uint8_t digitChange(uint8_t digit, int8_t diff, uint8_t digitMax)
@@ -121,3 +122,4 @@ void clock_changeTime(TTime * time, int8_t diff, TIME_FORMAT timeFormat, TIME_PO
         break;
     }
 }
+

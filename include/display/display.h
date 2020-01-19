@@ -30,7 +30,7 @@ void display_addCharToPosition(char c, int8_t pos, uint8_t flag);
 void display_setTimeText(uint8_t hoursBCD, uint8_t minutesBCD);
 void display_clear(void);
 void display_rollTimeText1(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame);
-void display_rollTimeText2(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame);
+bool display_rollTimeText2(uint8_t hoursBCD, uint8_t minutesBCD, uint8_t frame);
 void test_rool(void);
 void display_clearTimeDigit(uint8_t digit);
 void display_partiallyClear(uint32_t part);

@@ -19,7 +19,8 @@ void at24c32_writeByte(uint8_t id, uint16_t mem_addr, uint8_t data);
 void at24c32_writeBytes(uint8_t id, uint16_t mem_addr, uint8_t * data, uint8_t len);
 uint16_t at24c32_readCurrentAddress(uint8_t id);
 void at24c32_readBytes(uint8_t id, uint16_t mem_addr, uint8_t * data, uint8_t len);
-  
+uint8_t at24c32_getState(void);
+
 #ifdef	__cplusplus
 }
 #endif
