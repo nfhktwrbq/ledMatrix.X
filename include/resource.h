@@ -14,8 +14,11 @@ extern "C" {
 
 #define TEST_STRING "хуй тебе"
     
-#define MENU_STR    "AAA"
-#define EMPTY_STR   ""
+#define MENU_STR    			"AAA"
+#define EMPTY_STR   			""
+#define MENU_STR_ENTER_TIME		"1111"
+#define MENU_STR_SHOW_TIMEOUT	"2222"
+#define MENU_STR_SENSORS_SELECT	"3333"
 
 #ifdef	__cplusplus
 }

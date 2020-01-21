@@ -12,10 +12,10 @@
 #include "resource.h"
 
 const char string_1[] PROGMEM = EMPTY_STR;
-const char string_2[] PROGMEM = MENU_STR;
-const char string_3[] PROGMEM = MENU_STR;
-const char string_4[] PROGMEM = MENU_STR;
-const char string_5[] PROGMEM = MENU_STR;
+const char string_2[] PROGMEM = MENU_STR_ENTER_TIME;
+const char string_3[] PROGMEM = MENU_STR_SHOW_TIMEOUT;
+const char string_4[] PROGMEM = MENU_STR_SENSORS_SELECT;
+const char string_5[] PROGMEM = EMPTY_STR;
 
 PGM_P const menu_string_table[] PROGMEM = 
 {
@@ -23,7 +23,7 @@ PGM_P const menu_string_table[] PROGMEM =
     string_2,
     string_3,
     string_4,
-    string_5
+    string_5,
 };
 
 Menu_Item        Null_Menu = {(void*)0, (void*)0, (void*)0, (void*)0, (void*)0, (void*)0, 0x00};

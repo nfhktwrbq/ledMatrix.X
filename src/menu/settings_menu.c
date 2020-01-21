@@ -9,10 +9,10 @@
 void printText(char * str);
 
 
-//        Name,             Next,       Previous,       Parent,     Sibling,        SelectFunc,         EnterFunc,              Text
-MAKE_MENU(Level1Item1    , Level1Item2, Level1Item3, NULL_ENTRY , NULL_ENTRY     , NULL_FUNC           , NULL_FUNC           , 1);
-MAKE_MENU(Level1Item2    , Level1Item3, Level1Item1, NULL_ENTRY , NULL_ENTRY     , NULL_FUNC           , NULL_FUNC           , 2);
-MAKE_MENU(Level1Item3    , Level1Item1, Level1Item2, NULL_ENTRY , NULL_ENTRY     , NULL_FUNC           , NULL_FUNC           , 3);
+//        Name,            				 Next,       					Previous,       				Parent,     Sibling,        SelectFunc,         EnterFunc,           Text
+MAKE_MENU(Level1ItemEnterTime    		, Level1ItemSensorsShowTimeout, Level1ItemSensorsSelect, 	  NULL_ENTRY , NULL_ENTRY     , NULL_FUNC           , NULL_FUNC           , 1);
+MAKE_MENU(Level1ItemSensorsShowTimeout  , Level1ItemSensorsSelect	  , Level1ItemEnterTime	   , 	  NULL_ENTRY , NULL_ENTRY     , NULL_FUNC           , NULL_FUNC           , 2);
+MAKE_MENU(Level1ItemSensorsSelect    	, Level1ItemEnterTime		  , Level1ItemSensorsShowTimeout, NULL_ENTRY , NULL_ENTRY     , NULL_FUNC           , NULL_FUNC           , 3);
 
 //MAKE_MENU(Level1Item1Sub1, NULL_ENTRY , NULL_ENTRY , Level1Item1, NULL_ENTRY     , Level1Item1Sub1_Func, Level1Item1Sub1_Text, NULL_TEXT);
 

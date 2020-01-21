@@ -80,9 +80,14 @@ void proc_init(void)
 
 void hw_process(void)
 {    
+    static bool flButton = false;
+    buttons_proc();
     switch(proc_state)
     {
         case PROC_NONE:
+            proc_state = PROC_SHOW_TIME_START;
+            break;
+        case PROC_SHOW_TIME_START:
             if(getHardwareState(HW_CLOCK_OK))
             {
                 proc_state = PROC_SHOW_TIME_PREPARE;
@@ -134,6 +139,42 @@ void hw_process(void)
                 }                
                 display_show();
                 timer_restart(&secondTimer);
+            }
+            //if(buttons_getLongPressNumber() == BUTTON_ENTER)
+            if(buttons_getClickButtonNumber(BUTTON_RIGHT))
+            {
+                proc_state = PROC_SETTINGS_START;
+            }
+            break;
+        case PROC_SETTINGS_START:
+            SET_MENU(Level1ItemEnterTime);
+            proc_state = PROC_SETTINGS_GO;
+            buttons_clearClickButton();
+            break;
+        case PROC_SETTINGS_GO:
+            switch(buttons_getClickButtonNumber()) 
+            {
+                case BUTTON_LEFT:
+                    if(PARENT == NULL_ENTRY)
+                    {
+                        proc_state = PROC_SHOW_TIME_START;
+                    }
+                break;
+                case BUTTON_RIGHT:
+                    SET_MENU(SIBLING);
+                break;
+                case BUTTON_UP:
+                    SET_MENU(NEXT);
+                break;
+                case BUTTON_DOWN:
+                    SET_MENU(PREVIOUS);
+                break;
+                case BUTTON_ENTER:
+                    if(SIBLING == NULL_ENTRY)
+                    {
+                        GO_MENU_FUNC(SELECTFUNC);
+                    }
+                break;
             }
             break;
         default:

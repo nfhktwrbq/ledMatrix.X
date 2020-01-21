@@ -11,6 +11,7 @@
 #define BUTTON_RIGHT_BIT        0x80
 
 static uint8_t longPressButtons = 0;
+static uint8_t clickButtons = 0;
 
 void buttons_init(void)
 {
@@ -55,12 +56,15 @@ uint8_t buttons_getPressNumber(void)
     return BUTTON_NONE;
 }
 
+
+
 void buttons_proc(void)
 {
     static TTimer timer_button;
     static uint8_t curButtonNum = 0;
     static uint8_t prevButtonNum = 0;
     static bool pressFlag = false;
+    static bool pressFlag2 = false;
     
     curButtonNum = buttons_getPressNumber();
     if(prevButtonNum == curButtonNum && curButtonNum != 0)
@@ -80,15 +84,39 @@ void buttons_proc(void)
     {
         pressFlag = false;
     }
+
+    if(curButtonNum != BUTTON_NONE && !pressFlag2)
+    {
+        pressFlag2 == true;
+    }
+    if(curButtonNum == BUTTON_NONE && pressFlag2)
+    {
+        pressFlag2 = false;
+        clickButtons = prevButtonNum;
+    }
     prevButtonNum = curButtonNum;   
 }
 
 uint8_t buttons_getLongPressNumber(void)
 {
-    return longPressButtons;
+    uint8_t res = longPressButtons;
+    longPressButtons = BUTTON_NONE;
+    return res;
 }
 
-void clear_longPressBuffer(void)
+void buttons_clearLongPressButton(void)
 {
-    longPressButtons = 0;
+    longPressButtons = BUTTON_NONE;
+}
+
+uint8_t buttons_getClickButtonNumber(void)
+{
+    uint8_t res = clickButtons;
+    clickButtons = BUTTON_NONE;
+    return res;
+}
+
+void buttons_clearClickButton(void)
+{
+    longPressButtons = BUTTON_NONE;
 }
