@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "display.h"
 #include "clock.h"
+#include "settings.h"
  
 static uint32_t hardwareState = 0;
 
@@ -89,7 +90,9 @@ int enterTime(TTime * time, TIME_FORMAT timeFormat)
             enterPressFlag = false;
         }
 	}
-    
+    timer_stop(&buttonsTimeout);
+    while(buttons_getPress(BUTTON_ENTER)){};
+
 	if(timer_check(&buttonsTimeout)) 
 	{
         return ENTER_TIME_BUTTONS_TIMEOUT_ERR;
@@ -122,4 +125,77 @@ uint8_t crc8(uint8_t *pcBlock, uint16_t len)
     }
 
     return crc;
+}
+
+
+void showTimeout(uint8_t timeout)
+{
+    char displayData[5];
+    display_clear();
+    itoa(* timeout, displayData, 10);
+    strcat(displayData, "M");
+    display_setText(displayData, 0);
+    display_show();
+}
+
+int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMax)
+{
+    TTimer buttonsTimeout;
+    bool enterPressFlag = true;
+    uint8_t pressedButton;
+    uint8_t prevPressedButton = 0;
+    uint8_t sensorsTimeout = * timeout;
+
+    timer_start(&buttonsTimeout, ENTER_TIME_BUTTONS_TIMEOUT);
+    showTimeout(sensorsTimeout);
+
+    while((!buttons_getPress(BUTTON_ENTER) && !timer_check(&buttonsTimeout)) || enterPressFlag)
+    {
+        pressedButton = buttons_getPressNumber();
+        if(prevPressedButton != pressedButton)
+        {
+            prevPressedButton = pressedButton;
+            switch(pressedButton)
+            {
+                case BUTTON_LEFT:
+                    timer_restart(&buttonsTimeout);
+                    if(sensorsTimeout > timeoutMin)
+                        sensorsTimeout--;
+                break;
+                case BUTTON_RIGHT:
+                    timer_restart(&buttonsTimeout);
+                    if(sensorsTimeout < timeoutMax)
+                        sensorsTimeout++;
+                break;
+                case BUTTON_UP:
+                    timer_restart(&buttonsTimeout);
+                    timer_restart(&buttonsTimeout);
+                    if(sensorsTimeout < timeoutMax - 10)
+                        sensorsTimeout += 10;
+                break;
+                case BUTTON_DOWN:
+                    timer_restart(&buttonsTimeout);
+                    if(sensorsTimeout > timeoutMin + 10)
+                        sensorsTimeout -= 10;
+                break;
+            }
+            showTimeout(sensorsTimeout);
+            _delay_ms(50);
+        }
+
+        if(!buttons_getPress(BUTTON_ENTER) && enterPressFlag)
+        {
+            enterPressFlag = false;
+        }
+    }
+    timer_stop(&buttonsTimeout);
+    while(buttons_getPress(BUTTON_ENTER)){};
+
+    if(timer_check(&buttonsTimeout)) 
+    {
+        return ENTER_TIME_BUTTONS_TIMEOUT_ERR;
+    }
+    
+    * timeout = sensorsTimeout;
+    return 0;
 }
