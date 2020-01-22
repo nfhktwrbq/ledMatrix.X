@@ -128,17 +128,17 @@ uint8_t crc8(uint8_t *pcBlock, uint16_t len)
 }
 
 
-void showTimeout(uint8_t timeout)
+void showTimeout(uint8_t timeout, char uinit)
 {
     char displayData[5];
     display_clear();
     itoa(* timeout, displayData, 10);
-    strcat(displayData, "M");
+    strcat(displayData, unit);
     display_setText(displayData, 0);
     display_show();
 }
 
-int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMax)
+int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMax, char unit)
 {
     TTimer buttonsTimeout;
     bool enterPressFlag = true;
@@ -147,7 +147,7 @@ int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMa
     uint8_t sensorsTimeout = * timeout;
 
     timer_start(&buttonsTimeout, ENTER_TIME_BUTTONS_TIMEOUT);
-    showTimeout(sensorsTimeout);
+    showTimeout(sensorsTimeout, unit);
 
     while((!buttons_getPress(BUTTON_ENTER) && !timer_check(&buttonsTimeout)) || enterPressFlag)
     {
@@ -179,7 +179,7 @@ int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMa
                         sensorsTimeout -= 10;
                 break;
             }
-            showTimeout(sensorsTimeout);
+            showTimeout(sensorsTimeout, unit);
             _delay_ms(50);
         }
 
