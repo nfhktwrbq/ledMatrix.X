@@ -36,6 +36,7 @@ bool getHardwareState(HwBit hwBit);
 int enterTime(TTime * time, uint8_t timeFormat);    
 uint8_t crc8(uint8_t *pcBlock, uint16_t len);
 int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMax);
+void showSensorSelectState(char sensor, bool state);
 
 #ifdef	__cplusplus
 }

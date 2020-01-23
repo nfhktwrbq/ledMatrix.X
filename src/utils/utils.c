@@ -199,3 +199,24 @@ int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMa
     * timeout = sensorsTimeout;
     return 0;
 }
+
+void showSensorSelectState(char sensor, bool state)
+{
+    char displayData[5];
+    display_clear();
+    displayData[0] = sensor;
+    displayData[1] = ':';
+    if(state)
+    {
+        displayData[2] = 'O';
+        displayData[3] = 'K';
+    }
+    else
+    {
+        displayData[2] = 'N';
+        displayData[3] = 'O';
+    }
+    displayData[4] = 0;
+    display_setText(displayData, 0);
+    display_show();
+}

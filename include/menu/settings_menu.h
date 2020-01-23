@@ -13,7 +13,30 @@ extern "C" {
 #endif
 
 
+typedef enum 
+{
+	TEMPERATURE = 0,
+	HUMIDITY,
+	PRESSURE,
+	CO2,
+} SENSORS;
+
 void menu_init(void);
+
+void printText(char * str);
+void menu_enterTime(void);
+void menu_enterSensorsTimeout(void);
+
+void menu_changeSensorsSelectTemperature(void);	
+void menu_enterSensorsSelectTemperature(void);
+void menu_changeSensorsSelectHumidity(void);
+void menu_enterSensorsSelectHumidity(void);
+void menu_changeSensorsSelectPrerssure(void);
+void menu_enterSensorsSelectPrerssure(void);
+void menu_changeSensorsSelectCO2(void);
+void menu_enterSensorsSelectCO2(void);
+
+
 
 #ifdef	__cplusplus
 }
