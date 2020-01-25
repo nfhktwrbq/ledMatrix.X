@@ -12,18 +12,18 @@
 extern "C" {
 #endif
 
-#define TEST_STRING "õóé òåáå"
+#define TEST_STRING "ÒÅÑÒ"
     
-#define MENU_STR    					"AAA"
+#define MENU_STR    					"11"
 #define EMPTY_STR   					""
-#define MENU_STR_ENTER_TIME				"1111"
-#define MENU_STR_SHOW_TIMEOUT			"2222"
-#define MENU_STR_SHOW_DELAY				"3333"
-#define MENU_STR_SENSORS_SELECT 		"4444"
-#define MENU_STR_SENSORS_SELECT_TEMP	"5555"
-#define MENU_STR_SENSORS_SELECT_HUM		"6666"
-#define MENU_STR_SENSORS_SELECT_PRESS	"7777"
-#define MENU_STR_SENSORS_SELECT_CO2		"8888"
+#define MENU_STR_ENTER_TIME				"ÂĞÅÌß>"
+#define MENU_STR_SHOW_TIMEOUT			"ÈÍÒÅĞÂÀË>"
+#define MENU_STR_SHOW_DELAY				"ÇÀÄÅĞÆÊÀ>"
+#define MENU_STR_SENSORS_SELECT 		"ÄÀÒ×ÈÊÈ>"
+#define MENU_STR_SENSORS_SELECT_TEMP	"ÒÅÌÏÅĞÀÒÓĞÀ>"
+#define MENU_STR_SENSORS_SELECT_HUM		"ÂËÀÆÍÎÑÒÜ>"
+#define MENU_STR_SENSORS_SELECT_PRESS	"ÄÀÂËÅÍÈÅ>"
+#define MENU_STR_SENSORS_SELECT_CO2		"ÑÎ2>"
  
 #ifdef	__cplusplus
 }

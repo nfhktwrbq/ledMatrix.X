@@ -16,8 +16,10 @@
 #define MENU_USE_STRING_ARRAY (1 && !MENU_USE_SRAM_BUFFER)
 
 #if MENU_USE_STRING_ARRAY
-#define STRING_ARRAY_BUFFER_SIZE 10
+#define STRING_ARRAY_BUFFER_SIZE 20
 #endif
+
+extern PGM_P  const menu_string_table[];
 
 // Typedefs:
 typedef void (*FuncPtr)(void);
@@ -86,4 +88,5 @@ extern Menu_Item*       CurrMenuItem;
 void MenuChange(Menu_Item* NewMenu);
 void MenuFunc(FuncPtr* Function);
 
+EXTERN_MENU(Level1ItemEnterTime)
 #endif

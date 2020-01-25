@@ -19,6 +19,7 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/debug.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/bmp280.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/display/display.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/proc.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bme280_defs.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/clock.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/memory/at24c32.c</file>
@@ -30,19 +31,19 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/utils.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/interfaces/uart.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/timer.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/display/matrix.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/display/font.h</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/proc.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/buttons.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/mhz19b.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/Makefile</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/adc.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/main.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/clock.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/main.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bme.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/memory/at24c32.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/memory/settings_table.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/resource.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/memory/settings.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/resource.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/display/display.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/ring_buffer.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bmp.h</file>

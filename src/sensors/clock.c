@@ -54,9 +54,15 @@ uint8_t clock_getTime(TTime * time)
 
 uint8_t clock_setTime(TTime * time)
 {
+    uint8_t err;
     TClock clk;
     getDataReg(&clk);
-    memcpy(&clk.time, time, sizeof(TTime));
+    err = TWI_GetState();
+    if(err)
+    {
+        return err;
+    }
+    memcpy(&(clk.time), time, sizeof(TTime));
     setDataReg(&clk);
     return TWI_GetState();
 }

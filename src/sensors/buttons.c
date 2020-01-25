@@ -87,7 +87,7 @@ void buttons_proc(void)
 
     if(curButtonNum != BUTTON_NONE && !pressFlag2)
     {
-        pressFlag2 == true;
+        pressFlag2 = true;
     }
     if(curButtonNum == BUTTON_NONE && pressFlag2)
     {

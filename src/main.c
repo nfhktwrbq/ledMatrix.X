@@ -240,7 +240,7 @@ void buttonsTestLong(void)
     lb = buttons_getLongPressNumber();
     if(lb)
     {
-        clear_longPressBuffer();
+        buttons_getClickButtonNumber();
         if(lb == 1)
         {
             display_setText("BEE", 0);

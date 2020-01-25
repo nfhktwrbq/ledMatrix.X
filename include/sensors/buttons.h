@@ -53,7 +53,7 @@ typedef enum
  void buttons_proc(void);
  uint8_t buttons_getLongPressNumber(void);
  void buttons_clearLongPressButton(void);
- uint8_t buttons_getClickButtonNumber(void)
+ uint8_t buttons_getClickButtonNumber(void);
  void buttons_clearClickButton(void);
 
 #ifdef	__cplusplus

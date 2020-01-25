@@ -14,7 +14,7 @@ extern "C" {
 
 #include <avr/pgmspace.h>
 
-#define MAX_SETTING_SIZE 3
+#define MAX_SETTING_SIZE 4
     
 #define SETTING_DEF(type, name,...)		SETTING_##name,
 #define SETTING_DEF3(type, name,...)		SETTING_##name,

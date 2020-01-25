@@ -1,4 +1,6 @@
 #include <util/delay.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "utils.h"
 #include "buttons.h"
@@ -128,12 +130,12 @@ uint8_t crc8(uint8_t *pcBlock, uint16_t len)
 }
 
 
-void showTimeout(uint8_t timeout, char uinit)
+void showTimeout(uint8_t timeout, char unit)
 {
     char displayData[5];
     display_clear();
-    itoa(* timeout, displayData, 10);
-    strcat(displayData, unit);
+    itoa(timeout, displayData, 10);
+    strcat((char *)displayData, unit);
     display_setText(displayData, 0);
     display_show();
 }

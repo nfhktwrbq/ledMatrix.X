@@ -14,10 +14,12 @@ extern "C" {
 typedef enum
 {
     PROC_NONE = 0,
-    SHOW_TIME_START,
+    PROC_SHOW_TIME_START,
     PROC_SHOW_TIME_PREPARE,
     PROC_SHOW_TIME_GO,
     PROC_SETTINGS_START,
+    PROC_SETTINGS_GO,
+            
 } ProcState;
 
 void proc_init(void);

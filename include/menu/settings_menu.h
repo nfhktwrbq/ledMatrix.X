@@ -12,6 +12,9 @@
 extern "C" {
 #endif
 
+#include "Menu.h"
+
+#define MENU_PRINT_TEXT_OFFSET_TIMEOUT 80
 
 typedef enum 
 {
@@ -22,17 +25,20 @@ typedef enum
 } SENSORS;
 
 void menu_init(void);
+void menu_set(Menu_Item * menu);
+void menu_printTexProcess(void);
 
 void printText(char * str);
 void menu_enterTime(void);
 void menu_enterSensorsTimeout(void);
+void menu_enterSensorsDelay(void);
 
 void menu_changeSensorsSelectTemperature(void);	
 void menu_enterSensorsSelectTemperature(void);
 void menu_changeSensorsSelectHumidity(void);
 void menu_enterSensorsSelectHumidity(void);
-void menu_changeSensorsSelectPrerssure(void);
-void menu_enterSensorsSelectPrerssure(void);
+void menu_changeSensorsSelectPressure(void);
+void menu_enterSensorsSelectPressure(void);
 void menu_changeSensorsSelectCO2(void);
 void menu_enterSensorsSelectCO2(void);
 

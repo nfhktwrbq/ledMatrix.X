@@ -3,6 +3,7 @@
 #include <avr/pgmspace.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "display.h"
 #include "resource.h"
@@ -70,17 +71,22 @@ void proc_init(void)
     }    
     menu_init(); 
 #if DEBUG
-    itoa(err, &debug_disp[1], 10);
+    itoa(err, (char *)&debug_disp[1], 10);
     debug_disp[0] = 'A';   
-    display_setText(debug_disp, 0);
+    display_setText((char *)debug_disp, 0);
     display_show();
    _delay_ms(1000);
 #endif
+   TTime time3;
+   time3.minutes = 0x00;
+   time3.hours= 0x11;
+   time3.seconds= 0x22;
+   while(clock_setTime(&time3)){}
 }
 
 void hw_process(void)
 {    
-    static bool flButton = false;
+//    static bool flButton = false;
     buttons_proc();
     switch(proc_state)
     {
@@ -141,7 +147,7 @@ void hw_process(void)
                 timer_restart(&secondTimer);
             }
             //if(buttons_getLongPressNumber() == BUTTON_ENTER)
-            if(buttons_getClickButtonNumber(BUTTON_RIGHT))
+            if(buttons_getClickButtonNumber() == BUTTON_RIGHT)
             {
                 proc_state = PROC_SETTINGS_START;
             }
@@ -152,25 +158,26 @@ void hw_process(void)
             buttons_clearClickButton();
             break;
         case PROC_SETTINGS_GO:
+            menu_printTexProcess();
             switch(buttons_getClickButtonNumber()) 
             {
                 case BUTTON_LEFT:
-                    if(PARENT == NULL_ENTRY)
+                    if(&PARENT == &NULL_ENTRY)
                     {
                         proc_state = PROC_SHOW_TIME_START;
                     }
                 break;
                 case BUTTON_RIGHT:
-                    SET_MENU(SIBLING);
+                    menu_set(&SIBLING);
                 break;
                 case BUTTON_UP:
-                    SET_MENU(NEXT);
+                    menu_set(&NEXT);
                 break;
                 case BUTTON_DOWN:
-                    SET_MENU(PREVIOUS);
+                    menu_set(&PREVIOUS);
                 break;
                 case BUTTON_ENTER:
-                    if(SIBLING == NULL_ENTRY)
+                    if(&SIBLING == &NULL_ENTRY)
                     {
                         GO_MENU_FUNC(SELECTFUNC);
                     }
