@@ -16,7 +16,7 @@
 #define MENU_USE_STRING_ARRAY (1 && !MENU_USE_SRAM_BUFFER)
 
 #if MENU_USE_STRING_ARRAY
-#define STRING_ARRAY_BUFFER_SIZE 20
+#define STRING_ARRAY_BUFFER_SIZE 100
 #endif
 
 extern PGM_P  const menu_string_table[];

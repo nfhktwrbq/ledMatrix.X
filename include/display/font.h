@@ -14,7 +14,7 @@ extern "C" {
     
 #define FONT_HEIGHT     8    
 #define FONT_WIDTH      6
-#define MAX_CHAR_NUM    59
+#define MAX_CHAR_NUM    61
     
 uint8_t font_getCharLine(uint16_t character, uint8_t lineNum, uint8_t flag); 
  

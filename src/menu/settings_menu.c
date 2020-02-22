@@ -12,7 +12,7 @@
 #include "matrix.h"
 
 //        Name,            				 Next,       					Previous,       				Parent,   				 Sibling,        SelectFunc,         					EnterFunc,     					      Text
-MAKE_MENU(Level1ItemEnterTime    		, Level1ItemSensorsShowTimeout, Level1ItemSensorsSelect, 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterTime      					, NULL_FUNC    					       , 1);
+MAKE_MENU(Level1ItemEnterTime    		, Level1ItemSensorsShowTimeout, Level1ItemCalibrationCO2, 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterTime      					, NULL_FUNC    					       , 1);
 MAKE_MENU(Level1ItemSensorsShowTimeout  , Level1ItemSensorsShowDelay  , Level1ItemEnterTime	   , 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsTimeout   			, NULL_FUNC    					       , 2);
 MAKE_MENU(Level1ItemSensorsShowDelay    , Level1ItemSensorsSelect	  , Level1ItemSensorsShowTimeout, NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsDelay	    			, NULL_FUNC    					       , 3);
 MAKE_MENU(Level1ItemSensorsSelect    	, Level1ItemCalibrationCO2	  , Level1ItemSensorsShowDelay,	  NULL_ENTRY ,		Level2ItemTemperature  , NULL_FUNC								, NULL_FUNC    					       , 4);
@@ -22,7 +22,7 @@ MAKE_MENU(Level2ItemTemperature    		, Level2ItemHumidity		  , Level2ItemCO2,			
 MAKE_MENU(Level2ItemHumidity    		, Level2ItemPressure		  , Level2ItemTemperature, 		  Level1ItemSensorsSelect , NULL_ENTRY     , menu_changeSensorsSelectHumidity   	, NULL_FUNC                            , 6);
 MAKE_MENU(Level2ItemPressure    		, Level2ItemCO2				  , Level2ItemHumidity,			  Level1ItemSensorsSelect , NULL_ENTRY     , menu_changeSensorsSelectPressure       , NULL_FUNC                            , 7);
 MAKE_MENU(Level2ItemCO2		    		, Level2ItemCalibrationCO2	  , Level2ItemPressure, 		  Level1ItemSensorsSelect , NULL_ENTRY     , menu_changeSensorsSelectCO2        	, NULL_FUNC                            , 8);
-MAKE_MENU(Level2ItemCalibrationCO2		, Level2ItemTemperature		  , Level2ItemCO2,                Level1ItemCalibrationCO2, NULL_ENTRY     , menu_startCalibrationCO2           	, NULL_FUNC                            , 12);
+MAKE_MENU(Level2ItemCalibrationCO2		, NULL_ENTRY        		  , NULL_ENTRY,                   Level1ItemCalibrationCO2, NULL_ENTRY     , menu_startCalibrationCO2           	, NULL_FUNC                            , 12);
 
 
 MAKE_MENU(Level3ItemTemperatureOk  		, Level3ItemTemperatureNo	  , Level3ItemTemperatureNo,	  Level2ItemTemperature ,   NULL_ENTRY     , menu_SensorsTemperatureSet         	, NULL_FUNC                            , 9);

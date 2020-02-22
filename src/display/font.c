@@ -63,6 +63,8 @@ const uint8_t hexFont[MAX_CHAR_NUM][FONT_HEIGHT] PROGMEM = {
 	{ 0x30, 0x32, 0x04, 0x08, 0x10, 0x26, 0x06, 0x00, },	//57
 	{ 0x20, 0x10, 0x08, 0x04, 0x08, 0x10, 0x20, 0x00, },	//58
     { 0x00, 0x22, 0x26, 0x29, 0x29, 0x32, 0x22, 0x00, },	//59
+    { 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x06, 0x00, },	//60
+    { 0x00, 0x00, 0x00, 0x00, 0x1e, 0x00, 0x00, 0x00, },	//61
 };
 
 static uint8_t default_char[FONT_HEIGHT] = 
@@ -265,6 +267,10 @@ uint8_t font_getCharLine(uint16_t character, uint8_t lineNum, uint8_t flag)
         case 'N':
         case 'n':
             return pgm_read_byte(&(hexFont[58][lineNum]));
+        case '.':
+            return pgm_read_byte(&(hexFont[59][lineNum]));
+        case '-':
+            return pgm_read_byte(&(hexFont[60][lineNum]));
         default:
             return default_char[lineNum];       
     }

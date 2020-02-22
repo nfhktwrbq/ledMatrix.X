@@ -240,18 +240,24 @@ uint8_t startCalibrationCO2(void)
     static TTimer timer_button;
     char buffer[6];
     uint8_t butonsSequence[] = {BUTTON_LEFT, BUTTON_RIGHT, BUTTON_DOWN, BUTTON_UP};
+    uint8_t button = BUTTON_NONE;
     
     strcpy(buffer, "----");
     timer_start(&timer_button, CODE_ENTER_TIMEOUT);
     for(int i = 0; i < sizeof(butonsSequence); i++)
     {
+        button = BUTTON_NONE;
         display_setText(buffer, 0);
         display_show();
 
         buttons_clearClickButton();
         timer_restart(&timer_button);
-        while(buttons_getClickButtonNumber() == BUTTON_NONE && !timer_check(&timer_button)){};
-        if(timer_check(&timer_button) || buttons_getClickButtonNumber() != butonsSequence[i])
+        while(button == BUTTON_NONE && !timer_check(&timer_button))
+        {
+            buttons_proc();
+            button = buttons_getClickButtonNumber();
+        }
+        if(timer_check(&timer_button) || button != butonsSequence[i])
             return CO2_CALIBRATION_FAIL;
         buffer[i] = 0x30 + i;
     }
