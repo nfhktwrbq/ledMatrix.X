@@ -23,13 +23,11 @@ static void getDataReg(TClock * clk)
 
 static void setDataReg(TClock * clk)
 {
-    TClockTWICont clockCont;
-    clockCont.addr = (DS1307_ADDR << 1) | 0; 
-    clockCont.data.time.seconds = 0; //reset pointer
-    TWI_SendData((uint8_t *)&clockCont, 2);
-    
-    memcpy(&clockCont.data, clk, sizeof(TClock));    
-    TWI_SendData((uint8_t *)&clockCont, sizeof(TClockTWICont));
+    TClockTWIWriteCont clockCont;
+    clockCont.slaveAddr = (DS1307_ADDR << 1) | 0; 
+    clockCont.wordAddr = 0; //reset pointer
+    memcpy(&clockCont.data, clk, sizeof(TClock)); 
+    TWI_SendData((uint8_t *)&clockCont, sizeof(TClockTWIWriteCont));
 }
 
 uint8_t clock_init(void)

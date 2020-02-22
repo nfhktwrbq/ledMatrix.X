@@ -52,6 +52,13 @@ typedef struct __attribute__ ((packed))
     TClock data;
 } TClockTWICont;
 
+typedef struct __attribute__ ((packed))
+{
+    uint8_t slaveAddr;
+    uint8_t wordAddr;
+    TClock data;
+} TClockTWIWriteCont;
+
 typedef enum
 {
     SECOND_UNITS,

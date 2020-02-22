@@ -43,6 +43,15 @@ void menu_changeSensorsSelectCO2(void);
 void menu_enterSensorsSelectCO2(void);
 
 
+void menu_SensorsTemperatureSet(void);
+void menu_SensorsHumiditySet(void);
+void menu_SensorsPressureSet(void);
+void menu_SensorsCO2Set(void);
+void menu_SensorsTemperatureClear(void);
+void menu_SensorsHumidityClear(void);
+void menu_SensorsPressureClear(void);
+void menu_SensorsCO2Clear(void);
+void menu_startCalibrationCO2(void);
 
 #ifdef	__cplusplus
 }

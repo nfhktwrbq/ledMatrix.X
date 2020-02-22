@@ -8,7 +8,16 @@
 #include "display.h"
 #include "clock.h"
 #include "settings.h"
+#include "resource.h"
+#include "mhz19b.h"
  
+const char util_string_0[] PROGMEM = EMPTY_STR;
+
+PGM_P const util_string_table[] PROGMEM = 
+{
+    util_string_0,
+};
+
 static uint32_t hardwareState = 0;
 
 void setHardwareState(HwBit hwBit)
@@ -133,9 +142,12 @@ uint8_t crc8(uint8_t *pcBlock, uint16_t len)
 void showTimeout(uint8_t timeout, char unit)
 {
     char displayData[5];
+    char unitStr[2];
+    unitStr[0] = unit;
+    unitStr[1] = '\0';
     display_clear();
     itoa(timeout, displayData, 10);
-    strcat((char *)displayData, unit);
+    strcat((char *)displayData, unitStr);
     display_setText(displayData, 0);
     display_show();
 }
@@ -221,4 +233,58 @@ void showSensorSelectState(char sensor, bool state)
     displayData[4] = 0;
     display_setText(displayData, 0);
     display_show();
+}
+
+uint8_t startCalibrationCO2(void)
+{
+    static TTimer timer_button;
+    char buffer[6];
+    uint8_t butonsSequence[] = {BUTTON_LEFT, BUTTON_RIGHT, BUTTON_DOWN, BUTTON_UP};
+    
+    strcpy(buffer, "----");
+    timer_start(&timer_button, CODE_ENTER_TIMEOUT);
+    for(int i = 0; i < sizeof(butonsSequence); i++)
+    {
+        display_setText(buffer, 0);
+        display_show();
+
+        buttons_clearClickButton();
+        timer_restart(&timer_button);
+        while(buttons_getClickButtonNumber() == BUTTON_NONE && !timer_check(&timer_button)){};
+        if(timer_check(&timer_button) || buttons_getClickButtonNumber() != butonsSequence[i])
+            return CO2_CALIBRATION_FAIL;
+        buffer[i] = 0x30 + i;
+    }
+    display_setText(buffer, 0);
+    display_show();
+        
+    _delay_ms(200);   
+    mhz19b_startCalibrating();
+    
+    return CO2_CALIBRATION_OK; 
+}
+
+void hardReset(void)
+{
+    WDTCSR=0x18;
+    WDTCSR=0x08;
+    while(1);
+}
+
+void calibrationCO2Proc(void)
+{
+    char buffer[6];
+    uint8_t calTime = CALIBRATION_CO2_TIME;
+    while(calTime)
+    {
+        itoa(calTime, buffer, 10);
+        display_setText(buffer, 1);
+        display_show();
+        _delay_ms(60000);        
+        calTime--;
+    }
+    itoa(calTime, buffer, 10);
+    display_setText(buffer, 1);
+    display_show();
+    _delay_ms(100); 
 }

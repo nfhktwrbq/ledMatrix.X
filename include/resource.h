@@ -24,7 +24,11 @@ extern "C" {
 #define MENU_STR_SENSORS_SELECT_HUM		"бкюфмнярэ>"
 #define MENU_STR_SENSORS_SELECT_PRESS	"дюбкемхе>"
 #define MENU_STR_SENSORS_SELECT_CO2		"ян2>"
- 
+#define MENU_STR_SENSORS_SELECT_OK		"OK"
+#define MENU_STR_SENSORS_SELECT_NO		"NO"
+#define MENU_STR_CALIBRATION_CO2		"йюкхапнбйю ян2>"
+#define MENU_STR_CALIBRATION_CO2_MSG1	"йюкхапнбйю днкфмю опнбндхрэяъ 20 лхм опх йнмжемрпюжхх 400PPM. дкъ ондрбепфдемхъ мюфлхре ббнд"
+    
 #ifdef	__cplusplus
 }
 #endif

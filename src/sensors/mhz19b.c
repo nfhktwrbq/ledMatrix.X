@@ -14,7 +14,8 @@ typedef enum{
     WAIT_FOR_ANSWER,
     MAKE_ZERO_CALIBRATION,
     MAKE_SPAN_CALIBRATION,
-    SET_AUTOCALIBRATION,        
+    SET_AUTOCALIBRATION, 
+    CALIBRATING,
 } TMHZ19B_State;
 
 char getCheckSum(char * packet)
@@ -104,7 +105,7 @@ void mhz19b_proc(void)
                         pch += 2;
                         co2concentration = pch[0] * 256 + pch[1];
                     }
-                    mhz19b_state = 0;
+                    mhz19b_state = MHZ19B_OK;
                 }
                 else
                 {
@@ -120,8 +121,14 @@ void mhz19b_proc(void)
                 state = START_MEASURE;
             }            
             break;
+        case CALIBRATING://
+            return;
         default:
             state = START_MEASURE;
+    }
+    if(mhz19b_state == MHZ19B_CALIBRATING)
+    {
+        state = CALIBRATING;
     }
 }
 
@@ -133,4 +140,10 @@ uint16_t mhz19b_getCO2Concentration(void)
 uint8_t mhz19b_getState(void)
 {
     return mhz19b_state;
+}
+
+void mhz19b_startCalibrating(void)
+{
+    mhz19b_state = MHZ19B_CALIBRATING;
+    mhz19b_sendCommand(CALIBRATE_ZERO_POINT, 0);
 }

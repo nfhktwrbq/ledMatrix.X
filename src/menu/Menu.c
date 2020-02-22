@@ -20,6 +20,10 @@ const char string_5[] PROGMEM = MENU_STR_SENSORS_SELECT_TEMP;
 const char string_6[] PROGMEM = MENU_STR_SENSORS_SELECT_HUM;
 const char string_7[] PROGMEM = MENU_STR_SENSORS_SELECT_PRESS;
 const char string_8[] PROGMEM = MENU_STR_SENSORS_SELECT_CO2;
+const char string_9[] PROGMEM = MENU_STR_SENSORS_SELECT_OK;
+const char string_10[] PROGMEM = MENU_STR_SENSORS_SELECT_NO;
+const char string_11[] PROGMEM = MENU_STR_CALIBRATION_CO2;
+const char string_12[] PROGMEM = MENU_STR_CALIBRATION_CO2_MSG1;
 
 PGM_P const menu_string_table[] PROGMEM = 
 {
@@ -32,6 +36,10 @@ PGM_P const menu_string_table[] PROGMEM =
     string_6,
     string_7,
     string_8,
+    string_9,
+    string_10,
+    string_11,
+    string_12,
 };
 
 Menu_Item        Null_Menu = {(void*)0, (void*)0, (void*)0, (void*)0, (void*)0, (void*)0, 0x00};

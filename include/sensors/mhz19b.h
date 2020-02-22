@@ -29,6 +29,7 @@ extern "C" {
 
 #define MHZ19B_OK                   0
 #define MHZ19B_NOT_ANSWER           1  
+#define MHZ19B_CALIBRATING          2 
     
 typedef struct __attribute__ ((packed))
 {
@@ -43,6 +44,7 @@ void mhz19b_sendCommand(uint8_t cmd, uint16_t parameter);
 uint16_t mhz19b_getCO2Concentration(void);
 void mhz19b_proc(void);
 uint8_t mhz19b_getState(void);
+void mhz19b_startCalibrating(void);
 
 #ifdef	__cplusplus
 }

@@ -77,11 +77,11 @@ void proc_init(void)
     display_show();
    _delay_ms(1000);
 #endif
-   TTime time3;
-   time3.minutes = 0x00;
-   time3.hours= 0x11;
-   time3.seconds= 0x22;
-   while(clock_setTime(&time3)){}
+//   TTime time3;
+//   time3.minutes = 0x00;
+//   time3.hours= 0x11;
+//   time3.seconds= 0x22;
+//   while(clock_setTime(&time3)){}
 }
 
 void hw_process(void)
@@ -150,7 +150,7 @@ void hw_process(void)
             if(buttons_getClickButtonNumber() == BUTTON_RIGHT)
             {
                 proc_state = PROC_SETTINGS_START;
-            }
+            }            
             break;
         case PROC_SETTINGS_START:
             SET_MENU(Level1ItemEnterTime);
@@ -165,6 +165,10 @@ void hw_process(void)
                     if(&PARENT == &NULL_ENTRY)
                     {
                         proc_state = PROC_SHOW_TIME_START;
+                    }
+                    else
+                    {
+                        menu_set(&PARENT);
                     }
                 break;
                 case BUTTON_RIGHT:
