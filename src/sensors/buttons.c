@@ -112,11 +112,11 @@ void buttons_clearLongPressButton(void)
 uint8_t buttons_getClickButtonNumber(void)
 {
     uint8_t res = clickButtons;
-    clickButtons = BUTTON_NONE;
+    //clickButtons = BUTTON_NONE;
     return res;
 }
 
 void buttons_clearClickButton(void)
 {
-    longPressButtons = BUTTON_NONE;
+    clickButtons = BUTTON_NONE;
 }

@@ -11,6 +11,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    
+#define PROC_BRIGHTNESS_ADJUST_TIMEOUT  70000
+    
 typedef enum
 {
     PROC_NONE = 0,
@@ -19,7 +22,7 @@ typedef enum
     PROC_SHOW_TIME_GO,
     PROC_SETTINGS_START,
     PROC_SETTINGS_GO,
-            
+    PROC_SHOW_SENSORS,            
 } ProcState;
 
 void proc_init(void);

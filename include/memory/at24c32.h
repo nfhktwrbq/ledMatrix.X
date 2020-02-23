@@ -14,7 +14,9 @@ extern "C" {
 
 #define AT24C32_ADDR	0x50
 #define AT24C32_BUFFER_SIZE TWI_BUFFER_SIZE
-
+#define USE_ATMEGA_INTERNAL_EEPROM  1
+    
+    
 void at24c32_writeByte(uint8_t id, uint16_t mem_addr, uint8_t data);
 void at24c32_writeBytes(uint8_t id, uint16_t mem_addr, uint8_t * data, uint8_t len);
 uint16_t at24c32_readCurrentAddress(uint8_t id);

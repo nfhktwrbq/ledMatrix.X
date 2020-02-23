@@ -52,6 +52,8 @@ void menu_SensorsHumidityClear(void);
 void menu_SensorsPressureClear(void);
 void menu_SensorsCO2Clear(void);
 void menu_startCalibrationCO2(void);
+void menu_enterBrightnessStart(void);
+void menu_enterBrightnessSize(void);
 
 #ifdef	__cplusplus
 }

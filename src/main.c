@@ -46,7 +46,7 @@ int main(void) {
 		hw_process();
     }
 }
-
+/*
 void settings_test(void)
 {
     TTime time;
@@ -171,7 +171,7 @@ void settings_test(void)
     _delay_ms(1000);
     
 }
-
+*/
 void eeprom_test(void)
 {
     char buf[20];

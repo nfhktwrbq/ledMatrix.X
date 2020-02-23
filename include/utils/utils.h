@@ -15,11 +15,13 @@ extern "C" {
 #include <stdbool.h>
     
 #include "clock.h"  
+#include "settings.h"
     
 #define ENTER_TIME_BUTTONS_TIMEOUT	15000
 #define ENTER_TIME_BLINK_TIMEOUT	400
 #define CODE_ENTER_TIMEOUT          5000
-
+#define SETTINGS_UPDATE_TIMEOUT     10000
+#define SENSORS_DATA_OFFSET_TIMEOUT 50
 #define ENTER_TIME_BUTTONS_TIMEOUT_ERR  (-1)   
 
 #define CO2_CALIBRATION_FAIL        1
@@ -44,6 +46,12 @@ void showSensorSelectState(char sensor, bool state);
 uint8_t startCalibrationCO2(void);
 void hardReset(void);
 void calibrationCO2Proc(void);
+void enterUint8Setting(TSetting settingName, char unit);
+void brightnessAdjust(void);
+void settingUpdateInit(void);
+void sensorProc(void);
+void sensorsShow(void);
+uint8_t getSensorsTime(void);
 
 #ifdef	__cplusplus
 }

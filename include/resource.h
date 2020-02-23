@@ -28,6 +28,8 @@ extern "C" {
 #define MENU_STR_SENSORS_SELECT_NO		"NO"
 #define MENU_STR_CALIBRATION_CO2		"йюкхапнбйю ян2>"
 #define MENU_STR_CALIBRATION_CO2_MSG1	"йюкхапнбйю днкфмю опнбндхрэяъ 20 лхм опх йнмжемрпюжхх 400PPM. дкъ ондрбепфдемхъ мюфлхре ббнд"
+#define MENU_STR_BRIGHTNESS_START       "ъпйнярэ(мювюкэмюъ)"
+#define MENU_STR_BRIGHTNESS_SIZE        "ъпйнярэ(цпюдюжхх)"
     
 #ifdef	__cplusplus
 }

@@ -8,9 +8,18 @@
 #include "display.h"
 #include "clock.h"
 #include "settings.h"
+#include "settings_menu.h"
 #include "resource.h"
 #include "mhz19b.h"
- 
+#include "adc.h"
+#include "Menu.h"
+#include "font.h"
+#include "bme.h"
+
+static TTimer settingShowTimer;
+static uint8_t sensorsSelect;
+static uint8_t sensorsTime;
+
 const char util_string_0[] PROGMEM = EMPTY_STR;
 
 PGM_P const util_string_table[] PROGMEM = 
@@ -293,4 +302,176 @@ void calibrationCO2Proc(void)
     display_setText(buffer, 1);
     display_show();
     _delay_ms(100); 
+}
+
+void enterUint8Setting(TSetting settingName, char unit)
+{
+    uint8_t setting;
+	uint8_t settingMin;
+	uint8_t settingMax;
+
+	setting_getMin(settingName, &settingMin);
+	setting_getMax(settingName, &settingMax);
+	setting_get(settingName, &setting);
+	if(!enterSensorsTimeout(&setting, settingMin, settingMax, unit))
+	{
+		setting_set(settingName, &setting);
+	}
+}
+
+void brightnessAdjust(void)
+{
+    uint8_t brightnessStart;
+    uint8_t brightnessSize;
+    uint8_t adcValue;
+    uint8_t brightness;
+    
+    setting_get(SETTING_BRIGTHNESS_START, &brightnessStart);
+    setting_get(SETTING_BRIGTHNESS_SIZE, &brightnessSize);
+    
+    adcValue = adc_get();
+    brightness = adcValue * (brightnessSize + 1) / ADC_MAX + brightnessStart;
+     
+    display_setIntensity(brightness);
+    display_show();
+}
+
+void settingUpdateInit(void)
+{
+    timer_start(&settingShowTimer, SETTINGS_UPDATE_TIMEOUT);
+    setting_get(SETTING_SHOW_SENSORS, &sensorsSelect);
+    setting_get(SETTING_SHOW_SENSORS_TIME, &sensorsTime);    
+}
+
+void sensorProc(void)
+{    
+    //mhz19b_getState(void) == 
+    if(timer_check(&settingShowTimer))
+    {
+        timer_restart(&settingShowTimer);
+        setting_get(SETTING_SHOW_SENSORS, &sensorsSelect);
+        setting_get(SETTING_SHOW_SENSORS_TIME, &sensorsTime); 
+    }
+    
+    if(sensorsSelect & (1 << TEMPERATURE) || sensorsSelect & (1 << HUMIDITY) || sensorsSelect & (1 << PRESSURE))
+    {
+        bme_proc();
+    }
+    
+    if(sensorsSelect & (1 << CO2))
+    {
+        mhz19b_proc();
+    }	
+}
+
+uint8_t getSensorsTime(void)
+{
+    return sensorsTime;
+}
+
+void showSensorData(char * sensorNameStr, char * sensorDataStr, char * unitString, uint8_t delay )
+{
+    char buffer[40];
+    int8_t dataOffset = 0;
+    TTimer offsetTimer;
+    TTimer delayTimer;
+    uint8_t len;
+ 
+    strcpy(buffer, sensorNameStr);
+    strcat(buffer, sensorDataStr);
+    strcat(buffer, unitString);
+    
+    len = strlen(buffer);
+    
+    timer_start(&offsetTimer, SENSORS_DATA_OFFSET_TIMEOUT);
+    if((len * (FONT_WIDTH + LETTER_SPACE)) > MATRIX_NUM * MATRIX_WIDTH)
+    {
+        while(buttons_getClickButtonNumber() != BUTTON_LEFT && ((len * (FONT_WIDTH + LETTER_SPACE)) - MATRIX_NUM * MATRIX_WIDTH) + dataOffset > 0)
+        {
+            display_setText(buffer, dataOffset);
+            display_show();
+            if(timer_check(&offsetTimer))
+            {
+                timer_restart(&offsetTimer);
+                dataOffset--;
+            } 
+            buttons_proc();
+        }    
+    }
+    else
+    {
+        display_setText(buffer, 0);
+        display_show();
+    }
+    
+    timer_start(&delayTimer, delay*1000);    
+    while(buttons_getClickButtonNumber() != BUTTON_LEFT && !timer_check(&delayTimer))
+    {
+        buttons_proc();
+    }
+}
+
+void sensorsShow(void)
+{
+    uint8_t sensorsDelay;
+    char sensorNameStr[20];
+    char sensorDataStr[10];
+    char sensorUnitStr[10];
+     
+	setting_get(SETTING_SHOW_SENSORS_DELAY, &sensorsDelay);
+    if(sensorsSelect & (1 << TEMPERATURE))
+    {
+        uint8_t len;
+        int32_t temp;
+        strcpy_P(sensorNameStr, (PGM_P)pgm_read_word(&(menu_string_table[5])));
+        len = strlen(sensorNameStr);
+        sensorNameStr[len - 1] = '\0';
+        strcat(sensorNameStr, ": ");
+        temp = bme_getTemperature32();
+        itoa(temp, sensorDataStr, 10);
+        len = strlen(sensorDataStr);
+        sensorDataStr[len - 1] = sensorDataStr[len - 2];
+        sensorDataStr[len - 2] = '.';
+        strcpy(sensorUnitStr, "");
+        showSensorData(sensorNameStr, sensorDataStr, sensorUnitStr, sensorsDelay);
+    }
+    if(sensorsSelect & (1 << HUMIDITY))
+    {
+        uint8_t len;
+        uint32_t humidity;
+        strcpy_P(sensorNameStr, (PGM_P)pgm_read_word(&(menu_string_table[6])));
+        len = strlen(sensorNameStr);
+        sensorNameStr[len - 1] = '\0';
+        strcat(sensorNameStr, ": ");
+        humidity = bme_getHumidity32() / 1024;
+        itoa(humidity, sensorDataStr, 10);
+        strcpy(sensorUnitStr, "% ");
+        showSensorData(sensorNameStr, sensorDataStr, sensorUnitStr, sensorsDelay);
+    }
+    if(sensorsSelect & (1 << PRESSURE))
+    {
+        uint8_t len;
+        uint32_t pressure;
+        strcpy_P(sensorNameStr, (PGM_P)pgm_read_word(&(menu_string_table[7])));
+        len = strlen(sensorNameStr);
+        sensorNameStr[len - 1] = '\0';
+        strcat(sensorNameStr, ": ");
+        pressure = bme_getPressure32()/10000;
+        itoa(pressure, sensorDataStr, 10);
+        strcpy(sensorUnitStr, "");
+        showSensorData(sensorNameStr, sensorDataStr, sensorUnitStr, sensorsDelay);
+    }
+    if(sensorsSelect & (1 << CO2))
+    {
+        uint8_t len;
+        uint16_t co2;
+        strcpy_P(sensorNameStr, (PGM_P)pgm_read_word(&(menu_string_table[8])));
+        len = strlen(sensorNameStr);
+        sensorNameStr[len - 1] = '\0';
+        strcat(sensorNameStr, ": ");
+        co2 = mhz19b_getCO2Concentration();
+        itoa(co2, sensorDataStr, 10);
+        strcpy(sensorUnitStr, "");
+        showSensorData(sensorNameStr, sensorDataStr, sensorUnitStr, sensorsDelay);
+    }    
 }

@@ -6,8 +6,8 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/nbproject/Makefile-default.mk</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/menu/settings_menu.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/sensors/bme280.c</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/interfaces/twi.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/utils.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/interfaces/twi.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/bmp280.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/display/font.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/memory/settings.h</file>
@@ -31,8 +31,8 @@
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/utils.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/interfaces/uart.c</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/utils/timer.h</file>
-            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/display/font.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/src/utils/proc.c</file>
+            <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/display/font.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/buttons.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/include/sensors/mhz19b.h</file>
             <file>file:/home/muaddib/MPLABXProjects/ledMatrix.X/Makefile</file>

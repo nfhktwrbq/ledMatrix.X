@@ -118,7 +118,7 @@ void setting_get(TSetting setting, uint8_t * data)
     setting_getMax(setting, settingMax);
     setting_getDef(setting, settingDef);
     
-    at24c32_readBytes(AT24C32_ADDR, attr.offset, data, attr.len);
+    at24c32_readBytes(AT24C32_ADDR, attr.offset + offsetof(T_TableCont, S), data, attr.len);
     for(uint8_t i = 0; i < attr.len; i++)
     {         
         if(data[i] < settingMin[i] || data[i] > settingMax[i])
@@ -151,7 +151,7 @@ void setting_set(TSetting setting, uint8_t * data)
     setting_get(setting, settingDef);
     if(memcmp(settingDef, data, attr.len))
     {
-        at24c32_writeBytes(AT24C32_ADDR, attr.offset, data, attr.len);
+        at24c32_writeBytes(AT24C32_ADDR, attr.offset + offsetof(T_TableCont, S), data, attr.len);
     }
 }
 

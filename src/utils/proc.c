@@ -70,6 +70,7 @@ void proc_init(void)
         setHardwareState(HW_EEPROM_OK);
     }    
     menu_init(); 
+    settingUpdateInit();
 #if DEBUG
     itoa(err, (char *)&debug_disp[1], 10);
     debug_disp[0] = 'A';   
@@ -86,11 +87,24 @@ void proc_init(void)
 
 void hw_process(void)
 {    
+    static TTimer brightnessAdjtimer;
+    static TTimer sensorsShowTimeout;
 //    static bool flButton = false;
+    
     buttons_proc();
+    sensorProc();
+    
+    if(timer_check(&brightnessAdjtimer))
+    {
+        timer_restart(&brightnessAdjtimer);
+        brightnessAdjust();        
+    }
+    
     switch(proc_state)
     {
         case PROC_NONE:
+            timer_start(&brightnessAdjtimer, PROC_BRIGHTNESS_ADJUST_TIMEOUT);
+            timer_start(&sensorsShowTimeout, 60000*getSensorsTime());
             proc_state = PROC_SHOW_TIME_START;
             break;
         case PROC_SHOW_TIME_START:
@@ -98,6 +112,10 @@ void hw_process(void)
             {
                 proc_state = PROC_SHOW_TIME_PREPARE;
             }
+            if(buttons_getClickButtonNumber() == BUTTON_ENTER)
+            {
+                proc_state = PROC_SHOW_SENSORS;
+            } 
             break;
         case PROC_SHOW_TIME_PREPARE:
             clock_getTime(&currentTime);
@@ -149,8 +167,19 @@ void hw_process(void)
             //if(buttons_getLongPressNumber() == BUTTON_ENTER)
             if(buttons_getClickButtonNumber() == BUTTON_RIGHT)
             {
+                buttons_clearClickButton();
                 proc_state = PROC_SETTINGS_START;
-            }            
+            }   
+            if(buttons_getClickButtonNumber() == BUTTON_ENTER)
+            {
+                buttons_clearClickButton();
+                proc_state = PROC_SHOW_SENSORS;
+            } 
+            if(timer_check(&sensorsShowTimeout))
+            {
+                timer_start(&sensorsShowTimeout, 60000*getSensorsTime());
+                proc_state = PROC_SHOW_SENSORS;
+            }
             break;
         case PROC_SETTINGS_START:
             SET_MENU(Level1ItemEnterTime);
@@ -187,6 +216,12 @@ void hw_process(void)
                     }
                 break;
             }
+            buttons_clearClickButton();
+            break;
+        case PROC_SHOW_SENSORS:
+            sensorsShow();
+            timer_restart(&sensorsShowTimeout);
+            proc_state = PROC_SHOW_TIME_START;
             break;
         default:
             break;

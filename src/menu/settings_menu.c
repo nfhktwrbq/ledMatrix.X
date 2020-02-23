@@ -12,11 +12,15 @@
 #include "matrix.h"
 
 //        Name,            				 Next,       					Previous,       				Parent,   				 Sibling,        SelectFunc,         					EnterFunc,     					      Text
-MAKE_MENU(Level1ItemEnterTime    		, Level1ItemSensorsShowTimeout, Level1ItemCalibrationCO2, 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterTime      					, NULL_FUNC    					       , 1);
+MAKE_MENU(Level1ItemEnterTime    		, Level1ItemSensorsShowTimeout, Level1ItemBrightnessSize, 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterTime      					, NULL_FUNC    					       , 1);
 MAKE_MENU(Level1ItemSensorsShowTimeout  , Level1ItemSensorsShowDelay  , Level1ItemEnterTime	   , 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsTimeout   			, NULL_FUNC    					       , 2);
 MAKE_MENU(Level1ItemSensorsShowDelay    , Level1ItemSensorsSelect	  , Level1ItemSensorsShowTimeout, NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsDelay	    			, NULL_FUNC    					       , 3);
 MAKE_MENU(Level1ItemSensorsSelect    	, Level1ItemCalibrationCO2	  , Level1ItemSensorsShowDelay,	  NULL_ENTRY ,		Level2ItemTemperature  , NULL_FUNC								, NULL_FUNC    					       , 4);
-MAKE_MENU(Level1ItemCalibrationCO2    	, Level1ItemEnterTime		  , Level1ItemSensorsSelect,	  NULL_ENTRY ,    Level2ItemCalibrationCO2 , NULL_FUNC              				, NULL_FUNC    					       , 11);
+MAKE_MENU(Level1ItemCalibrationCO2    	, Level1ItemBrightnessStart	  , Level1ItemSensorsSelect,	  NULL_ENTRY ,    Level2ItemCalibrationCO2 , NULL_FUNC              				, NULL_FUNC    					       , 11);
+MAKE_MENU(Level1ItemBrightnessStart    	, Level1ItemBrightnessSize	  , Level1ItemCalibrationCO2,	  NULL_ENTRY ,              NULL_ENTRY     , menu_enterBrightnessStart				, NULL_FUNC    					       , 13);
+MAKE_MENU(Level1ItemBrightnessSize    	, Level1ItemEnterTime		  , Level1ItemBrightnessStart,	  NULL_ENTRY ,              NULL_ENTRY     , menu_enterBrightnessSize  				, NULL_FUNC    					       , 14);
+
+
 
 MAKE_MENU(Level2ItemTemperature    		, Level2ItemHumidity		  , Level2ItemCO2,				  Level1ItemSensorsSelect , NULL_ENTRY     , menu_changeSensorsSelectTemperature	, NULL_FUNC                            , 5);
 MAKE_MENU(Level2ItemHumidity    		, Level2ItemPressure		  , Level2ItemTemperature, 		  Level1ItemSensorsSelect , NULL_ENTRY     , menu_changeSensorsSelectHumidity   	, NULL_FUNC                            , 6);
@@ -103,33 +107,13 @@ void menu_enterTime(void)
 
 void menu_enterSensorsTimeout(void)
 {
-	uint8_t sensorsTime;
-	uint8_t sensorsTimeMin;
-	uint8_t sensorsTimeMax;
-
-	setting_getMin(SETTING_SHOW_SENSORS_TIME, &sensorsTimeMin);
-	setting_getMax(SETTING_SHOW_SENSORS_TIME, &sensorsTimeMax);
-	setting_get(SETTING_SHOW_SENSORS_TIME, &sensorsTime);
-	if(!enterSensorsTimeout(&sensorsTime, sensorsTimeMin, sensorsTimeMax, 'm'))
-	{
-		setting_set(SETTING_SHOW_SENSORS_TIME, &sensorsTime);
-	}
+    enterUint8Setting(SETTING_SHOW_SENSORS_TIME, 'm');
 	//SET_MENU(CurrMenuItem); 
 }
 
 void menu_enterSensorsDelay(void)
 {
-	uint8_t sensorsTime;
-	uint8_t sensorsTimeMin;
-	uint8_t sensorsTimeMax;
-
-	setting_getMin(SETTING_SHOW_SENSORS_DELAY, &sensorsTimeMin);
-	setting_getMax(SETTING_SHOW_SENSORS_DELAY, &sensorsTimeMax);
-	setting_get(SETTING_SHOW_SENSORS_DELAY, &sensorsTime);
-	if(!enterSensorsTimeout(&sensorsTime, sensorsTimeMin, sensorsTimeMax, 'c'))
-	{
-		setting_set(SETTING_SHOW_SENSORS_DELAY, &sensorsTime);
-	}
+    enterUint8Setting(SETTING_SHOW_SENSORS_DELAY, 'c');
 	//SET_MENU(CurrMenuItem); 
 }
 
@@ -325,4 +309,14 @@ void menu_startCalibrationCO2(void)
         while(1);
     }
     menu_set(&Level1ItemCalibrationCO2);
+}
+
+void menu_enterBrightnessStart(void)
+{
+    enterUint8Setting(SETTING_BRIGTHNESS_START, '\0');
+}
+
+void menu_enterBrightnessSize(void)
+{
+    enterUint8Setting(SETTING_BRIGTHNESS_SIZE, '\0');
 }
