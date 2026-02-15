@@ -14,7 +14,12 @@ extern "C" {
 
 #include <inttypes.h>
     
-#define DS1307_ADDR 0x68
+    #define DS1307  1
+    #define M41T81  2
+    
+#define CLOCK_ADDR 0x68    
+#define M41T81_CAL_MSK                  (0x1f)
+#define CLOCK_MAX_ABS_CAL_VAL           M41T81_CAL_MSK
 
 #define SECOND_UNITS_MAX    9
 #define SECOND_TENS_MAX     5
@@ -79,6 +84,9 @@ uint8_t clock_init(void);
 uint8_t clock_setTime(TTime * time);
 uint8_t clock_getTime(TTime * time);
 void clock_changeTime(TTime * time, int8_t diff, TIME_FORMAT timeFormat, TIME_POS pos);
+
+int8_t clock_calibration_get(void);
+void clock_calibration_set(int8_t val);
 
 #ifdef	__cplusplus
 }

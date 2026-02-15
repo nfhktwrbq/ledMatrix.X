@@ -27,6 +27,9 @@ extern "C" {
 #define CO2_CALIBRATION_FAIL        1
 #define CO2_CALIBRATION_OK          0
 #define CALIBRATION_CO2_TIME        20//min
+    
+#define ABS(x)      (x >= 0 ? x : -x)
+    
 typedef enum HwBit
 {
 	HW_CLOCK_OK = 0,
@@ -39,7 +42,8 @@ void setHardwareState(HwBit hwBit);
 void clearHardwareState(HwBit hwBit);
 bool getHardwareState(HwBit hwBit);
 
-int enterTime(TTime * time, uint8_t timeFormat);    
+int enterTime(TTime * time, TIME_FORMAT timeFormat); 
+int enterClocklCalibration(int8_t * calibration);
 uint8_t crc8(uint8_t *pcBlock, uint16_t len);
 int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMax, char unit);
 void showSensorSelectState(char sensor, bool state);

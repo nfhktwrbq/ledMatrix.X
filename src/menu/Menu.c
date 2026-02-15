@@ -26,6 +26,7 @@ const char string_11[] PROGMEM = MENU_STR_CALIBRATION_CO2;
 const char string_12[] PROGMEM = MENU_STR_CALIBRATION_CO2_MSG1;
 const char string_13[] PROGMEM = MENU_STR_BRIGHTNESS_START;
 const char string_14[] PROGMEM = MENU_STR_BRIGHTNESS_SIZE;
+const char string_15[] PROGMEM = MENU_STR_CLOCK_CALIBRATION;
 
 PGM_P const menu_string_table[] PROGMEM = 
 {
@@ -44,6 +45,7 @@ PGM_P const menu_string_table[] PROGMEM =
     string_12,
     string_13,
     string_14,
+    string_15,
 };
 
 Menu_Item        Null_Menu = {(void*)0, (void*)0, (void*)0, (void*)0, (void*)0, (void*)0, 0x00};

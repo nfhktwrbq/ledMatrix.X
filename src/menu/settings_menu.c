@@ -12,8 +12,14 @@
 #include "matrix.h"
 
 //        Name,            				 Next,       					Previous,       				Parent,   				 Sibling,        SelectFunc,         					EnterFunc,     					      Text
+#if CLOCK_IC==M41T81 
+MAKE_MENU(Level1ItemEnterTime    		, Level1ItemClockCalibration,   Level1ItemBrightnessSize, 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterTime      					, NULL_FUNC    					       , 1);
+MAKE_MENU(Level1ItemClockCalibration	, Level1ItemSensorsShowTimeout, Level1ItemEnterTime, 	      NULL_ENTRY ,				NULL_ENTRY     , menu_clockCalibration					, NULL_FUNC    					       , 15);
+MAKE_MENU(Level1ItemSensorsShowTimeout  , Level1ItemSensorsShowDelay  , Level1ItemClockCalibration,   NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsTimeout   			, NULL_FUNC    					       , 2);
+#else
 MAKE_MENU(Level1ItemEnterTime    		, Level1ItemSensorsShowTimeout, Level1ItemBrightnessSize, 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterTime      					, NULL_FUNC    					       , 1);
-MAKE_MENU(Level1ItemSensorsShowTimeout  , Level1ItemSensorsShowDelay  , Level1ItemEnterTime	   , 	  NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsTimeout   			, NULL_FUNC    					       , 2);
+MAKE_MENU(Level1ItemSensorsShowTimeout  , Level1ItemSensorsShowDelay  , Level1ItemEnterTime,          NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsTimeout   			, NULL_FUNC    					       , 2);
+#endif
 MAKE_MENU(Level1ItemSensorsShowDelay    , Level1ItemSensorsSelect	  , Level1ItemSensorsShowTimeout, NULL_ENTRY ,				NULL_ENTRY     , menu_enterSensorsDelay	    			, NULL_FUNC    					       , 3);
 MAKE_MENU(Level1ItemSensorsSelect    	, Level1ItemCalibrationCO2	  , Level1ItemSensorsShowDelay,	  NULL_ENTRY ,		Level2ItemTemperature  , NULL_FUNC								, NULL_FUNC    					       , 4);
 MAKE_MENU(Level1ItemCalibrationCO2    	, Level1ItemBrightnessStart	  , Level1ItemSensorsSelect,	  NULL_ENTRY ,    Level2ItemCalibrationCO2 , NULL_FUNC              				, NULL_FUNC    					       , 11);
@@ -103,6 +109,15 @@ void menu_enterTime(void)
 		clock_setTime(&time);
 	}
 	//SET_MENU(CurrMenuItem); 
+}
+
+void menu_clockCalibration(void)
+{
+    int8_t calibration = 0;
+    if (enterClocklCalibration(&calibration) == 0)
+    {
+        clock_calibration_set(calibration);
+    }
 }
 
 void menu_enterSensorsTimeout(void)

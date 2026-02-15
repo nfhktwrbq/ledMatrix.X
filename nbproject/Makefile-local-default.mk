@@ -14,24 +14,23 @@
 # You can invoke make with the values of the macros:
 # $ makeMP_CC="/opt/microchip/mplabc30/v3.30c/bin/pic30-gcc" ...  
 #
-PATH_TO_IDE_BIN=/opt/microchip/mplabx/v5.30/mplab_platform/platform/../mplab_ide/modules/../../bin/
+PATH_TO_IDE_BIN=/opt/microchip/mplabx/v6.30/mplab_platform/platform/../mplab_ide/modules/../../bin/
 # Adding MPLAB X bin directory to path.
-PATH:=/opt/microchip/mplabx/v5.30/mplab_platform/platform/../mplab_ide/modules/../../bin/:$(PATH)
+PATH:=/opt/microchip/mplabx/v6.30/mplab_platform/platform/../mplab_ide/modules/../../bin/:$(PATH)
 # Path to java used to run MPLAB X when this makefile was created
-MP_JAVA_PATH="/usr/lib/jvm/java-8-openjdk/jre/bin/"
+MP_JAVA_PATH="/opt/microchip/mplabx/v6.30/sys/java/zulu8.86.0.25-ca-fx-jre8.0.452-linux_x64/bin/"
 OS_CURRENT="$(shell uname -s)"
-MP_CC="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc"
-MP_CPPC="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin/avr-g++"
+MP_CC="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc"
+MP_CPPC="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin/avr-g++"
 # MP_BC is not defined
-MP_AS="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin/avr-as"
-MP_LD="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin/avr-ld"
-MP_AR="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin/avr-ar"
-DEP_GEN=${MP_JAVA_PATH}java -jar "/opt/microchip/mplabx/v5.30/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
-MP_CC_DIR="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin"
-MP_CPPC_DIR="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin"
+MP_AS="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin/avr-as"
+MP_LD="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin/avr-ld"
+MP_AR="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc-ar"
+DEP_GEN=${MP_JAVA_PATH}java -jar "/opt/microchip/mplabx/v6.30/mplab_platform/platform/../mplab_ide/modules/../../bin/extractobjectdependencies.jar"
+MP_CC_DIR="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin"
+MP_CPPC_DIR="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin"
 # MP_BC_DIR is not defined
-MP_AS_DIR="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin"
-MP_LD_DIR="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin"
-MP_AR_DIR="/home/muaddib/Programms/avr8-gnu-toolchain-linux_x86_64/bin"
-# MP_BC_DIR is not defined
-DFP_DIR="/opt/microchip/mplabx/v5.30/packs/Microchip/ATmega_DFP/2.0.12"
+MP_AS_DIR="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin"
+MP_LD_DIR="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin"
+MP_AR_DIR="/home/muaddib/Programs/avr8-gnu-toolchain-linux_x86_64/bin"
+DFP_DIR=/opt/microchip/mplabx/v6.30/packs/Microchip/ATmega_DFP/3.5.296

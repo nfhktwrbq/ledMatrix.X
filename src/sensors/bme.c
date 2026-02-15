@@ -58,6 +58,7 @@ int8_t bme_proc(void)
         case 0:
             if(timer_check(&bme_measure_timer))
             {
+                timer_restart(&bme_measure_timer);
                 rslt = bme280_set_sensor_mode(BME280_FORCED_MODE, &dev);
                 if (rslt != BME280_OK)
                     return rslt;
@@ -69,6 +70,8 @@ int8_t bme_proc(void)
         case 1:
             if(timer_check(&bme_conversion_timer))
             {
+                timer_restart(&bme_conversion_timer);
+                timer_restart(&bme_measure_timer);
                 bme_state = 0;
                 rslt = bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
                 if (rslt != BME280_OK)

@@ -92,6 +92,7 @@ void mhz19b_proc(void)
         case WAIT_FOR_ANSWER:
             if(timer_check(&mhz19b_timer) && mhz19b_state == MHZ19B_OK)
             {
+                timer_restart(&mhz19b_timer);
                 uint8_t answ[RING_BUFFER_SIZE + 1];
                 uint8_t len;
                 uart_rb_receive_bytes(answ, &len);

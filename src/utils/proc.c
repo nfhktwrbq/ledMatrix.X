@@ -115,6 +115,7 @@ void hw_process(void)
             if(buttons_getClickButtonNumber() == BUTTON_ENTER)
             {
                 proc_state = PROC_SHOW_SENSORS;
+                buttons_clearClickButton();
             } 
             break;
         case PROC_SHOW_TIME_PREPARE:
@@ -221,6 +222,7 @@ void hw_process(void)
         case PROC_SHOW_SENSORS:
             sensorsShow();
             timer_restart(&sensorsShowTimeout);
+            buttons_clearClickButton();
             proc_state = PROC_SHOW_TIME_START;
             break;
         default:

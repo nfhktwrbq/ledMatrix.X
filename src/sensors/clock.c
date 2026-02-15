@@ -4,16 +4,34 @@
 #include "twi.h"
 #include "debug.h"
 
+#ifndef CLOCK_IC
+#define CLOCK_IC DS1307
+#endif
+
+#define DS1307_HOURS_12_24_MSK        (1 << 6)
+#define DS1307_HOURS_24_MSK           (0x3f) 
+
+#define M41T81_CB_MSK                   (1 << 6)
+#define M41T81_CEB_MSK                  (1 << 7)
+#define M41T81_S_MSK                    (1 << 5)
+#define M41T81_CAL_REG_ADDR             (8)
+
+#if CLOCK_IC==M41T81
+#define SECONDS_REG_ADDR    (1)
+#else
+#define SECONDS_REG_ADDR    (0)
+#endif
+
 
 static void getDataReg(TClock * clk)
 {
     TClockTWICont clockCont;
-    clockCont.data.time.seconds = 0;
-    clockCont.addr = (DS1307_ADDR << 1) | 0; 
+    clockCont.data.time.seconds = SECONDS_REG_ADDR;
+    clockCont.addr = (CLOCK_ADDR << 1) | 0; 
     
     TWI_SendData((uint8_t *)&clockCont, 2);
     
-    clockCont.addr = (DS1307_ADDR << 1) | 1;
+    clockCont.addr = (CLOCK_ADDR << 1) | 1;
     TWI_SendData((uint8_t *)&clockCont, sizeof(clockCont));
     
     TWI_GetData((uint8_t *)&clockCont, sizeof(clockCont));
@@ -24,10 +42,40 @@ static void getDataReg(TClock * clk)
 static void setDataReg(TClock * clk)
 {
     TClockTWIWriteCont clockCont;
-    clockCont.slaveAddr = (DS1307_ADDR << 1) | 0; 
-    clockCont.wordAddr = 0; //reset pointer
+    clockCont.slaveAddr = (CLOCK_ADDR << 1) | 0; 
+    clockCont.wordAddr = SECONDS_REG_ADDR; //reset pointer
     memcpy(&clockCont.data, clk, sizeof(TClock)); 
     TWI_SendData((uint8_t *)&clockCont, sizeof(TClockTWIWriteCont));
+}
+
+static uint8_t readReg(uint8_t reg_addr)
+{    
+    uint8_t msg_w[] = {        
+        (CLOCK_ADDR << 1) | 0,
+        reg_addr,
+    };
+    
+    TWI_SendData(msg_w, sizeof(msg_w));
+    
+    uint8_t msg_r[] = {
+        (CLOCK_ADDR << 1) | 1,
+        0,
+    };
+    
+    TWI_SendData(msg_r, sizeof(msg_r));    
+    TWI_GetData(msg_r, sizeof(msg_r));    
+    return msg_r[1];
+}
+
+static void writeReg(uint8_t reg_addr, uint8_t reg)
+{
+    uint8_t msg_w[] = {        
+        (CLOCK_ADDR << 1) | 0,
+        reg_addr,
+        reg,
+    };
+    
+    TWI_SendData(msg_w, sizeof(msg_w));
 }
 
 uint8_t clock_init(void)
@@ -39,6 +87,29 @@ uint8_t clock_init(void)
         clk.time.seconds &= ~0x80;
         setDataReg(&clk);
     }
+#if CLOCK_IC==M41T81
+    if(clk.time.hours & (M41T81_CEB_MSK | M41T81_CB_MSK))
+    {
+        clk.time.hours &= ~(M41T81_CEB_MSK | M41T81_CB_MSK);
+        setDataReg(&clk);
+    }
+    uint8_t ht_reg = readReg(0x0c);
+    if (0x40 & ht_reg)
+    {
+        ht_reg &= ~0x40;
+        writeReg(0x0c, ht_reg);
+    }
+//    for (uint8_t i = 0; i < 0x14; i++)
+//    {
+//        (void)readReg(i);
+//    }
+#else
+    if(clk.time.hours & DS1307_HOURS_12_24_MSK)
+    {
+        clk.time.hours &= ~DS1307_HOURS_12_24_MSK;
+        setDataReg(&clk);
+    }
+#endif
     return TWI_GetState();
 }
 
@@ -46,6 +117,7 @@ uint8_t clock_getTime(TTime * time)
 {
     TClock clk;
     getDataReg(&clk);
+    clk.time.hours &= DS1307_HOURS_24_MSK;
     memcpy(time, &clk.time, sizeof(TTime));
     return TWI_GetState();
 }
@@ -110,7 +182,8 @@ void clock_changeTime(TTime * time, int8_t diff, TIME_FORMAT timeFormat, TIME_PO
         case HOUR_TENS:
             if(timeFormat == TIME_FORMAT_24)
             {
-                time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_24 ) << 4);if((time->hours >> 4) == 2 && (time->hours & 0x0f) > 4)
+                time->hours = (time->hours & 0x0f) + (digitChange(time->hours >> 4, diff, HOUR_TENS_MAX_24 ) << 4);
+                if((time->hours >> 4) == 2 && (time->hours & 0x0f) > 4)
                 {
                     time->hours &= 0xf0;  
                 }
@@ -127,3 +200,44 @@ void clock_changeTime(TTime * time, int8_t diff, TIME_FORMAT timeFormat, TIME_PO
     }
 }
 
+void clock_calibration_set(int8_t val)
+{
+#if CLOCK_IC==M41T81 
+    uint8_t cal = readReg(M41T81_CAL_REG_ADDR);
+    cal &= ~((1 << 6) | (M41T81_CAL_MSK)); //rest FT and current cal
+    if (val > 0)
+    {
+        cal |= M41T81_S_MSK;
+    }
+    else
+    {
+        cal &= ~M41T81_S_MSK;
+        val *= -1;
+    }
+    if (val > M41T81_CAL_MSK)
+    {
+        val = M41T81_CAL_MSK;
+    }    
+    
+    cal |= val & M41T81_CAL_MSK;
+    
+    writeReg(M41T81_CAL_REG_ADDR, cal);
+#endif
+}
+
+int8_t clock_calibration_get(void)
+{
+#if CLOCK_IC==M41T81  
+    uint8_t cal = readReg(M41T81_CAL_REG_ADDR);
+    
+    bool neg = true;
+    if (cal & M41T81_S_MSK)
+    {
+        neg = false;
+    }
+    
+    int8_t res = (cal & M41T81_CAL_MSK) * (neg ? (-1) : 1);
+    
+    return res;    
+#endif
+}

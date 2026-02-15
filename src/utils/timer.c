@@ -7,7 +7,9 @@ volatile uint32_t milliseconds = 0;
 
 ISR(TIMER0_OVF_vect)
 {
+    cli();
     milliseconds++;
+    sei();
 }
 
 ISR(TIMER1_OVF_vect)
@@ -43,7 +45,7 @@ bool timer_check(TTimer * timer)
 {
     if(!timer->isActive)
         return false;
-    return (milliseconds - timer->start > timer->timeout);
+    return ((milliseconds - timer->start) > timer->timeout);
 }
 
 void timer_stop(TTimer * timer)

@@ -30,6 +30,7 @@ void menu_printTexProcess(void);
 
 void printText(char * str);
 void menu_enterTime(void);
+void menu_clockCalibration(void);
 void menu_enterSensorsTimeout(void);
 void menu_enterSensorsDelay(void);
 

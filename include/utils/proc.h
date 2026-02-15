@@ -12,7 +12,7 @@
 extern "C" {
 #endif
     
-#define PROC_BRIGHTNESS_ADJUST_TIMEOUT  70000
+#define PROC_BRIGHTNESS_ADJUST_TIMEOUT  5000
     
 typedef enum
 {

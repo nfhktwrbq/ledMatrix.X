@@ -30,6 +30,7 @@ extern "C" {
 #define MENU_STR_CALIBRATION_CO2_MSG1	"йюкхапнбйю днкфмю опнбндхрэяъ 20 лхм опх йнмжемрпюжхх 400PPM. дкъ ондрбепфдемхъ мюфлхре ббнд"
 #define MENU_STR_BRIGHTNESS_START       "ъпйнярэ(мювюкэмюъ)"
 #define MENU_STR_BRIGHTNESS_SIZE        "ъпйнярэ(цпюдюжхх)"
+#define MENU_STR_CLOCK_CALIBRATION      "йюкхапнбйю вюянб"
     
 #ifdef	__cplusplus
 }

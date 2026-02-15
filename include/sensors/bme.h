@@ -12,7 +12,7 @@
 extern "C" {
 #endif
     
-#define BME_MEASURE_TIMEOUT         2000
+#define BME_MEASURE_TIMEOUT         10000
 #define BME_CONVERSION_TIMEOUT      50
     
 int8_t bme_init(void);

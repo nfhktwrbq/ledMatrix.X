@@ -29,6 +29,19 @@ PGM_P const util_string_table[] PROGMEM =
 
 static uint32_t hardwareState = 0;
 
+static void showTimeout(uint8_t timeout, char unit)
+{
+    char displayData[5];
+    char unitStr[2];
+    unitStr[0] = unit;
+    unitStr[1] = '\0';
+    display_clear();
+    itoa(timeout, displayData, 10);
+    strcat((char *)displayData, unitStr);
+    display_setText(displayData, 0);
+    display_show();
+}
+
 void setHardwareState(HwBit hwBit)
 {
     hardwareState |= (uint32_t)(1 << hwBit);
@@ -121,6 +134,63 @@ int enterTime(TTime * time, TIME_FORMAT timeFormat)
     return 0;
 }
 
+int enterClocklCalibration(int8_t * calibration)
+{
+    TTimer buttonsTimeout;
+    bool enterPressFlag = true;
+    uint8_t pressedButton;
+    uint8_t prevPressedButton = 0;
+
+    int8_t cal = clock_calibration_get();
+    char unit = (cal >= 0) ? '+' : '-';  
+    
+    timer_start(&buttonsTimeout, ENTER_TIME_BUTTONS_TIMEOUT);
+    showTimeout(ABS(cal), unit);
+
+    while((!buttons_getPress(BUTTON_ENTER) && !timer_check(&buttonsTimeout)) || enterPressFlag)
+    {
+        pressedButton = buttons_getPressNumber();
+        if(prevPressedButton != pressedButton)
+        {
+            prevPressedButton = pressedButton;
+            switch(pressedButton)
+            {
+                case BUTTON_LEFT:
+                    timer_restart(&buttonsTimeout);
+                    if(ABS(cal) < CLOCK_MAX_ABS_CAL_VAL || cal > 0)
+                    {
+                        cal--;
+                    }
+                break;
+                case BUTTON_RIGHT:
+                    timer_restart(&buttonsTimeout);
+                    if(ABS(cal) < CLOCK_MAX_ABS_CAL_VAL || cal < 0)
+                    {
+                        cal++;
+                    }
+                break;
+            }
+            showTimeout(ABS(cal), cal >= 0 ? '+' : '-');
+            _delay_ms(50);
+        }
+
+        if(!buttons_getPress(BUTTON_ENTER) && enterPressFlag)
+        {
+            enterPressFlag = false;
+        }
+    }
+    timer_stop(&buttonsTimeout);
+    while(buttons_getPress(BUTTON_ENTER)){};
+
+    if(timer_check(&buttonsTimeout)) 
+    {
+        return ENTER_TIME_BUTTONS_TIMEOUT_ERR;
+    }
+    
+    *calibration = cal;
+    return 0;
+}
+
 /*
   Name  : CRC-8
   Poly  : 0x31    x^8 + x^5 + x^4 + 1
@@ -145,20 +215,6 @@ uint8_t crc8(uint8_t *pcBlock, uint16_t len)
     }
 
     return crc;
-}
-
-
-void showTimeout(uint8_t timeout, char unit)
-{
-    char displayData[5];
-    char unitStr[2];
-    unitStr[0] = unit;
-    unitStr[1] = '\0';
-    display_clear();
-    itoa(timeout, displayData, 10);
-    strcat((char *)displayData, unitStr);
-    display_setText(displayData, 0);
-    display_show();
 }
 
 int enterSensorsTimeout(uint8_t * timeout, uint8_t timeoutMin, uint8_t timeoutMax, char unit)
