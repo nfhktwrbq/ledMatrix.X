@@ -80,27 +80,33 @@ static void writeReg(uint8_t reg_addr, uint8_t reg)
 
 uint8_t clock_init(void)
 {
-   TClock clk;
-    getDataReg(&clk);
-    if(clk.time.seconds & 0x80)
-    {
-        clk.time.seconds &= ~0x80;
-        setDataReg(&clk);
-    }
+    TClock clk;
+    
 #if CLOCK_IC==M41T81
-    if(clk.time.hours & (M41T81_CEB_MSK | M41T81_CB_MSK))
-    {
-        clk.time.hours &= ~(M41T81_CEB_MSK | M41T81_CB_MSK);
-        setDataReg(&clk);
-    }
     uint8_t ht_reg = readReg(0x0c);
     if (0x40 & ht_reg)
     {
         ht_reg &= ~0x40;
         writeReg(0x0c, ht_reg);
     }
+#endif
+    
+    getDataReg(&clk);
+    if(clk.time.seconds & 0x80)
+    {
+        clk.time.seconds &= ~0x80;
+        setDataReg(&clk);
+    }
+
+ #if CLOCK_IC==M41T81      
+    if(clk.time.hours & (M41T81_CEB_MSK | M41T81_CB_MSK))
+    {
+        clk.time.hours &= ~(M41T81_CEB_MSK | M41T81_CB_MSK);
+        setDataReg(&clk);
+    }
+
 //    for (uint8_t i = 0; i < 0x14; i++)
-//    {
+//    { 
 //        (void)readReg(i);
 //    }
 #else

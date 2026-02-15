@@ -106,6 +106,7 @@ void menu_enterTime(void)
 	}
 	if(!enterTime(&time, TIME_FORMAT_24))
 	{
+        time.seconds = 0;
 		clock_setTime(&time);
 	}
 	//SET_MENU(CurrMenuItem); 
